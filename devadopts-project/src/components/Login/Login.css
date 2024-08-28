@@ -1,0 +1,84 @@
+/* Container for the registration form */
+.container-login {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgb(214, 241, 214);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.container-login h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+}
+
+/* Style each input container */
+.container-login div {
+    margin-bottom: 15px;
+}
+
+/* Input field styling */
+.container-login input[type="text"],
+.container-login input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Input field focus state */
+.container-login input[type="text"]:focus,
+.container-login input[type="password"]:focus {
+    border-color: rgb(191, 137, 37);
+    outline: none;
+    box-shadow: 0 0 5px rgb(191, 137, 37);
+}
+
+/* Button styling */
+.container-login button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(191, 137, 37);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.container-login button:hover {
+    background-color: #527193;
+}
+
+/* Error message styling */
+.container-login p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: red;
+}
+
+
+@media (max-width: 480px) {
+    .container-register {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    .container-register h1 {
+        font-size: 20px;
+    }
+
+    .container-register button {
+        font-size: 14px;
+    }
+}

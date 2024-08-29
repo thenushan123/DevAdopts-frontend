@@ -41,11 +41,15 @@ export default function Login() {
                     setError('');
                     localStorage.setItem("token", data.token);
                     navigate('/home');
-                } 
+                }
+                else {
+                    const errorMessage = await response.text();
+                    setError(errorMessage || 'Login failed. Please check your credentials and try again.');
+                 }
             }
             catch(e){
-                setError(e);
-                console.log(e)
+                setError(e.message);
+                console.log(e.message)
             }
         }
     }
@@ -56,7 +60,7 @@ export default function Login() {
         <form onSubmit={handleSubmit}>
         <div>
             <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 value={formData.email}
@@ -79,7 +83,7 @@ export default function Login() {
         <button type="submit">Login</button>
         <p>{error}</p>
         </form>
-        <p>Are you a new user? <Link to='/'> Register</Link></p>
+        <p>Are you a new user? <Link to='/Register'> Register</Link></p>
     </div>
   )
 }

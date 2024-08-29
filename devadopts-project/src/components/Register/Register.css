@@ -63,12 +63,16 @@
 }
 
 /* Error message styling */
-.container-register p {
+.container-register span {
     margin: 5px 0;
     font-size: 14px;
     color: red;
 }
-
+.message-success {
+    margin: 5px 0;
+    font-size: 20px;
+    color: green;
+}
 
 @media (max-width: 480px) {
     .container-register {

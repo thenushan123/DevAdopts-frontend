@@ -24,6 +24,7 @@
 
 /* Input field styling */
 .container-login input[type="text"],
+.container-login input[type="email"],
 .container-login input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -35,6 +36,7 @@
 
 /* Input field focus state */
 .container-login input[type="text"]:focus,
+.container-login input[type="email"]:focus,
 .container-login input[type="password"]:focus {
     border-color: rgb(191, 137, 37);
     outline: none;
@@ -64,21 +66,21 @@
 .container-login p {
     margin: 5px 0;
     font-size: 14px;
-    color: red;
+    color: darkslategrey;
 }
 
 
 @media (max-width: 480px) {
-    .container-register {
+    .container-login {
         padding: 15px;
         margin: 20px;
     }
 
-    .container-register h1 {
+    .container-login h1 {
         font-size: 20px;
     }
 
-    .container-register button {
+    .container-login button {
         font-size: 14px;
     }
 }

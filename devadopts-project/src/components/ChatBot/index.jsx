@@ -5,7 +5,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 
 export default function ChatBot() {
     const [typing, setTyping] = useState(false);
-    const API_KEY = "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"
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const [messages, setMessages] = useState([
         {
             message: "Hello I am DogoBot. I can help you find you a dog that matches your lifestyle and your personality",

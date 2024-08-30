@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Register.css';
+import { Link, useNavigate} from 'react-router-dom';
+import { userProfileContext } from '../../contexts/userContext';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -9,12 +11,15 @@ export default function Register() {
         username:'',
         password: '',
         repeat_Password: '',
-        postcode: '',
+        post_code: '',
         admin: false
       });
 
     const [errorPostCode, setErrorPostCode] = useState(false);
-    const [errorPasswordMatch, setPasswordMatch] = useState(false);
+    const [errorPasswordMatch, setErrorPasswordMatch] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+    const { loading, setLoading } = userProfileContext();
 
     const handleChange = (e) => {
         setFormData({
@@ -23,25 +28,56 @@ export default function Register() {
         });
       };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         validatePostcode();
         validatePasswordMatch();
-        setFormData({
-            first_name: '',
-            last_name: '',
-            email: '',
-            username:'',
-            password: '',
-            repeat_Password: '',
-            postcode: '',
-            admin: false
-          })
+        if (!errorPostCode && !errorPasswordMatch){
+          try{
+            const options = {
+              method: "POST",
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+            };
+            setLoading(true);
+            if (loading) return <div className="loading">Loading...</div>;
+            const response = await fetch("http://localhost:3000/users/register", options);
+            if (!response.ok) {
+              setMessage('Unsuccessful Registration.');
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            if (data.id){
+              setLoading(false)
+              setMessage('Registered successfully.');
+              setTimeout(() => {setMessage(''); navigate('/login');}, 5000);
+              setFormData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                username:'',
+                password: '',
+                repeat_Password: '',
+                post_code: '',
+                admin: false
+              })
+            }
+        }
+          catch(e){
+            console.log(e);
+          }
+        }
+        else{
+          return;
+        }
       };
     
     const validatePostcode =()=>{
         const ukPostcodePattern = /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i;
-        if (!ukPostcodePattern.test(formData.postcode)) {
+        if (!ukPostcodePattern.test(formData.post_code)) {
             setErrorPostCode(true)
           } 
         else  {
@@ -51,13 +87,14 @@ export default function Register() {
 
     const validatePasswordMatch =()=>{
         if (formData.password !== formData.repeat_Password) {
-            setPasswordMatch(true);
+            setErrorPasswordMatch(true);
           } 
         else  {
-            setPasswordMatch(false); 
+            setErrorPasswordMatch(false); 
         }
       };
 
+      if (loading) return <div className="loading">Registering user...</div>;
   return (
     <div className='container-register'>
         <h1>Register</h1>
@@ -97,17 +134,6 @@ export default function Register() {
             </div>
             <div>
                 <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                placeholder='Username'
-                required
-                />
-            </div>
-            <div>
-                <input
                 type="password"
                 id="password"
                 name="password"
@@ -131,9 +157,9 @@ export default function Register() {
             <div>
                 <input
                 type="text"
-                id="postcode"
-                name="postcode"
-                value={formData.postcode}
+                id="post_code"
+                name="post_code"
+                value={formData.post_code}
                 onChange={handleChange}
                 placeholder='Postcode'
                 />
@@ -143,6 +169,8 @@ export default function Register() {
             </span>
             <button type="submit">Register</button>
         </form>
+        <p style={{ color: 'grey' }}>Already a user? <Link to="/login">Login</Link></p>
+        <p className='message-success'>{message}</p>
     </div>
   )
 }

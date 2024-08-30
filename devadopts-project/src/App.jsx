@@ -1,15 +1,37 @@
 import "./App.css";
-import { RegisterPage, NotFoundPage, LoginPage, AboutPage } from "./pages";
+import {
+  RegisterPage,
+  NotFoundPage,
+  LoginPage,
+  HomePage,
+  LandingPage,
+  DogsDisplay,
+  DogDetailsPage,
+} from "./pages";
+import { PageWrapper } from "./components";
+import { UserProvider } from "./contexts/userContext";
+import { DogsProvider } from "./contexts/DogsContext";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<RegisterPage />} />
-      <Route path="/Login" element={<LoginPage />} />
-      <Route path="/About" element={<AboutPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    <UserProvider>
+      <DogsProvider>
+        <Routes>
+          <Route path="/" element={<PageWrapper />}>
+            <Route index element={<LandingPage />} />
+            <Route path="/Register" element={<RegisterPage />} />
+            <Route path="/Login" element={<LoginPage />} />
+            <Route path="/Home" element={<HomePage />} />
+            <Route path="/DogsDisplay">
+              <Route index element={<DogsDisplay />} />
+              <Route path=":id" element={<DogDetailsPage />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </DogsProvider>
+    </UserProvider>
   );
 }
 

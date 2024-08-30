@@ -5,3 +5,4 @@ export { default as HomePage } from "./HomePage";
 export { default as LandingPage } from "./LandingPage";
 export { default as DogsDisplay } from "./DogsDisplayPage";
 export { default as DogDetailsPage } from "./DogDetailsPage";
+export { default as AboutPage } from "./AboutPage";

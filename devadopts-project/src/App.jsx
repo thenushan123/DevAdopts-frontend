@@ -7,6 +7,7 @@ import {
   LandingPage,
   DogsDisplay,
   DogDetailsPage,
+  AboutPage,
 } from "./pages";
 import { PageWrapper } from "./components";
 import { UserProvider } from "./contexts/userContext";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/Register" element={<RegisterPage />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Home" element={<HomePage />} />
+            <Route path="/About" element={<AboutPage />} />
             <Route path="/DogsDisplay">
               <Route index element={<DogsDisplay />} />
               <Route path=":id" element={<DogDetailsPage />} />

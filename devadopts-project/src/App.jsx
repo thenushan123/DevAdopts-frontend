@@ -1,5 +1,5 @@
 import './App.css'
-import { RegisterPage, NotFoundPage, LoginPage, HomePage, LandingPage, DogsDisplay, DogDetailsPage} from './pages';
+import { RegisterPage, NotFoundPage, LoginPage, HomePage, LandingPage, DogsDisplay, DogDetailsPage, AboutPage} from './pages';
 import { PageWrapper } from './components';
 import { UserProvider } from './contexts/userContext';
 import { DogsProvider } from './contexts/DogsContext';
@@ -19,6 +19,7 @@ function App() {
               <Route index element={<DogsDisplay />}/>
               <Route path=":id" element={<DogDetailsPage />}/>
             </Route>
+            <Route path="/AboutUs" element={<AboutPage />}/>
             <Route path="*" element={<NotFoundPage />}/>
           </Route>
         </Routes>

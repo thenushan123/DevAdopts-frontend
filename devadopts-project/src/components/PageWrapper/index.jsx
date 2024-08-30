@@ -9,6 +9,7 @@ export default function PageWrapper() {
             <nav>
                 <NavLink to="/login">Login</NavLink>
                 <NavLink to="/register">Register</NavLink>
+                <NavLink to="/AboutUs">About Us</NavLink>
             </nav>
         </header>
         <Outlet />

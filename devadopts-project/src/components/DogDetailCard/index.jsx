@@ -11,7 +11,6 @@ export default function DogDetailCard({dog}) {
   return (
     <div className='container-card'>
         <img  style={{width:"150px", height:"150px"}} src={dog.photo} alt={dog.dog_name} />
-        {/* <img src={imageUrl} alt='dogimage' /> */}
         <h3>{dog.dog_name}</h3>
         <p>Gender: {dog.gender}</p>
         <p>Age : {dog.age}</p>

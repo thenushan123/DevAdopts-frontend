@@ -1,0 +1,47 @@
+.dog-details-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .dog-details-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .dog-profile {
+    display: flex; /* Flexbox layout for side-by-side alignment */
+    gap: 20px; /* Gap between the image and details */
+    background-color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dog-info-grid {
+    display: flex; /* Flexbox to align information side by side */
+    gap: 30px; /* Space between columns */
+    /* justify-content: space-between; Space out the columns */
+    /* flex-grow: 1; Allow it to grow and fill the available space */
+  }
+  
+  .dog-info-column {
+    flex: 1; /* Each column takes equal space */
+  }
+
+  .dog-info-column p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .dog-info-column p strong {
+    color: #333; /* Bold color for labels */
+  }
+  

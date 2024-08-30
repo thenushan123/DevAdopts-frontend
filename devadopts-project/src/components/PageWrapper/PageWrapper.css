@@ -1,7 +1,7 @@
 .navbar-container {
     width: 100%;
     padding: 20px;
-    background:rgb(186, 182, 182);
+    background:none;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
   }
@@ -19,7 +19,7 @@
     backdrop-filter: blur(10px); */
 }
 .navbar a {
-    color: green;
+    color: white;
     font-size: 16px;
     text-decoration: none;
     margin: 0 15px;
@@ -28,21 +28,23 @@
 }
   
 .navbar a:hover {
-    color: var(--primary-color);
+    color: rgb(147, 135, 119);
 }
   
-.page-wrapper {
+/* .page-wrapper {
     padding-top: 30px;
     position: relative;
     z-index: 1;
-}
+} */
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--background-color);
-    color: #333; 
+    background-color: none;
+    color: white; 
     text-align: center;
-    padding: 5px;
+    /* padding: 5px; */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+    backdrop-filter: blur(10px);
 }

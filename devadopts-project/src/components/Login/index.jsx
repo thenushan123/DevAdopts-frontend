@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
+import { userProfileContext } from '../../contexts/userContext';
 
 export default function Login() {
+    const {loading, setLoading} = userProfileContext();
     const [formData, setFormData] = useState({
         email:'',
         password: ''
@@ -34,8 +36,9 @@ export default function Login() {
                     },
                     body: JSON.stringify(formData)
                 }
+                setLoading(true);
                 const response = await fetch("http://localhost:3000/users/login", options);
-    
+                setLoading(false);
                 if (response.status == 200) {
                     const data = await response.json();
                     setError('');
@@ -53,7 +56,7 @@ export default function Login() {
             }
         }
     }
-
+    if (loading) return <div className="loading">Logging in</div>;
   return (
     <div className='container-login'>
         <h1>Login</h1>

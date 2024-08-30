@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+
 
 export default function LandingPage() {
   return (
-    <div>LandingPage</div>
+    <h1>Where Paws Meet Their Perfect Match!</h1>
   )
 }

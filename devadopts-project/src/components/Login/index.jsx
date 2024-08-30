@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
+import { userProfileContext } from '../../contexts/userContext';
 
 export default function Login() {
+    const {loading, setLoading} = userProfileContext();
     const [formData, setFormData] = useState({
         email:'',
         password: ''
@@ -34,29 +36,34 @@ export default function Login() {
                     },
                     body: JSON.stringify(formData)
                 }
+                setLoading(true);
                 const response = await fetch("http://localhost:3000/users/login", options);
-    
+                setLoading(false);
                 if (response.status == 200) {
                     const data = await response.json();
                     setError('');
                     localStorage.setItem("token", data.token);
                     navigate('/home');
-                } 
+                }
+                else {
+                    const errorMessage = await response.text();
+                    setError(errorMessage || 'Login failed. Please check your credentials and try again.');
+                 }
             }
             catch(e){
-                setError(e);
-                console.log(e)
+                setError(e.message);
+                console.log(e.message)
             }
         }
     }
-
+    if (loading) return <div className="loading">Logging in</div>;
   return (
     <div className='container-login'>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
         <div>
             <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 value={formData.email}
@@ -79,7 +86,7 @@ export default function Login() {
         <button type="submit">Login</button>
         <p>{error}</p>
         </form>
-        <p>Are you a new user? <Link to='/'> Register</Link></p>
+        <p>Are you a new user? <Link to='/Register'> Register</Link></p>
     </div>
   )
 }

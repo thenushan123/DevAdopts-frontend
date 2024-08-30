@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate} from 'react-router-dom';
 import { userProfileContext } from '../../contexts/userContext';
@@ -129,17 +129,6 @@ export default function Register() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder='Email'
-                required
-                />
-            </div>
-            <div>
-                <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                placeholder='Username'
                 required
                 />
             </div>

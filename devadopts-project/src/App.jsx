@@ -1,7 +1,7 @@
 import './App.css'
 import { RegisterPage, NotFoundPage, LoginPage, HomePage, LandingPage, DogsDisplay, DogDetailsPage, AboutPage} from './pages';
 import { PageWrapper } from './components';
-import { UserProvider } from './contexts/userContext';
+import { UserProvider } from './contexts/UserContext';
 import { DogsProvider } from './contexts/DogsContext';
 import {Route, Routes} from 'react-router-dom';
 

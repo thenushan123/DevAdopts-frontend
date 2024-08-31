@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
-import { userProfileContext } from '../../contexts/userContext';
+import { userProfileContext } from '../../contexts/UserContext';
 
 export default function Login() {
     const {loading, setLoading} = userProfileContext();

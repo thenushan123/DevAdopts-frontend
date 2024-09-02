@@ -7,7 +7,7 @@ export const userProfileContext = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
-const value = { loading, setLoading }
+  const value = { loading, setLoading }
 
   return (
     <UserContext.Provider value={value}>

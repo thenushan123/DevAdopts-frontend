@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { useDogsDetail } from '../../contexts/DogsContext';
 import DogDetailCard from '../DogDetailCard';
 import './ShowDogs.css';
@@ -6,21 +6,24 @@ import './ShowDogs.css';
 export default function ShowDogs() {
     const { dogs, setDogs} = useDogsDetail();
     const [postcode, setPostcode] = useState('');
-    const [selectedBreed, setSelectedBreed] = useState("");
     const [errorPostCode, setErrorPostCode] = useState(false);
+    const [searchInitiated, setSearchInitiated] = useState(false);
     const [searchedDogs, setSearchedDogs] = useState(dogs);
+    const [radius, setRadius] = useState(50);
 
-    useEffect(() => {
-        async function displayDogsInformation() {
-            const response = await fetch("http://localhost:3000/dogs");
-            const rawData = await response.json();
-            const data = rawData.data
-            setDogs(data);
-            setSearchedDogs(data);
-        }
-        displayDogsInformation();
-      
-      }, []);
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+      const R = 6371; // Radius of the earth in km
+      const dLat = (lat2 - lat1) * (Math.PI / 180);  // deg2rad
+      const dLon = (lon2 - lon1) * (Math.PI / 180); 
+      const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2); 
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+      const distance = R * c; // Distance in km
+      return distance;
+    };
+  
       const validatePostcode =()=>{
         const ukPostcodePattern = /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i;
         if (!ukPostcodePattern.test(postcode)) {
@@ -32,50 +35,84 @@ export default function ShowDogs() {
             return true;
         }
       };
-      const handleSearch = () =>{
-        const selectedBreedLowerCase = selectedBreed.toLowerCase();
+      const handleSearch = async () =>{
+        setSearchInitiated(true);
+        const response = await fetch('http://localhost:3000/dogs');
+        const rawData = await response.json();
+        const data = rawData.data;
+        setDogs(data);
+
+        const dogsWithLatLng = await Promise.all(
+        data.map(async (dog) =>{
+          try{
+            const geoResponse = await fetch(`http://localhost:3000/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`);
+            const geoData = await geoResponse.json();
+            const { latitude, longitude } = geoData.data;
+            return { ...dog, latitude, longitude };
+          }
+          catch(error){
+            console.error(`Error fetching geocode for postcode ${dog.shelter_location_postcode}:`, error);
+            return dog;
+          }
+        }
+      ));
+      setDogs(dogsWithLatLng);
+      try{
         if(postcode === "" || validatePostcode())
         {
-          const filteredDogs = dogs.filter((dog) => {
-            return (
-              (postcode === '' || dog.shelter_location_postcode === postcode) && 
-              (selectedBreed === '' || dog.breed.toLowerCase().includes(selectedBreedLowerCase))
-            );
-          });
+          const userGeoResponse = await fetch(`http://localhost:3000/maps/geocode/zip/?postcode=${postcode}`);
+          const userGeoData = await userGeoResponse.json();
+
+          const { latitude: userLat, longitude: userLng } = userGeoData.data;
+
+          const filteredDogs = dogsWithLatLng
+            .map((dog) => {
+              const distance = calculateDistance(userLat, userLng, dog.latitude, dog.longitude);
+              return { ...dog, distance };
+            })
+            .filter((dog) => dog.distance <= radius)
+            .sort((a, b) => a.distance - b.distance)
+
           setSearchedDogs(filteredDogs)
+          console.log('filtereddogs', filteredDogs);
         }
+        else{
+          setSearchedDogs(dogsWithLatLng);
+        }
+        setSearchInitiated(false);
       }
+      catch(error){
+        console.error('Error fetching user location geocode:', error);
+        setSearchInitiated(false);
+      }
+    }
     
   return (
   <>
     <h2>Find a dog to adopt</h2>
-    <div className="search-bar">
-        <input
-          type="text"
-          className="search-input"
-          value={postcode}
-          onChange={(e) => setPostcode(e.target.value)}
-          placeholder="Enter your postcode"
-        />
-        <span>{errorPostCode && <p style={{ color: 'red' }}>Please enter correct postcode</p>}</span>
-        <div className="dropdown">
-          <p>Select a Dog Breed</p>
-          <select value={selectedBreed} onChange={(e) => setSelectedBreed(e.target.value)}>
-            <option value="">-- Select a breed --</option>
-            <option value="Labrador">Labrador</option>
-            <option value="Pomeranian">Pomeranian</option>
-            <option value="German Shepherd">German Shepherd</option>
-            <option value="Siberian Husky">Siberian Husky</option>
-          </select>
+      <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            value={postcode}
+            onChange={(e) => setPostcode(e.target.value)}
+            placeholder="Enter your postcode"
+          />
+          <span>{errorPostCode && <p style={{ color: 'red' }}>Please enter correct postcode</p>}</span>
+          <label>
+            Radius: {radius} km
+          </label>
+          <div className="slidecontainer">
+            <input type="range" min="1" max="100" value={radius} onChange={(e) => setRadius(Number(e.target.value))} className="slider" id="myRange"/>
+          </div>
+          <button className="search-dogs" onClick={handleSearch}>Search</button>
+          <span>{searchInitiated && postcode==="" && <p style={{ color: 'red' }}>Please enter a postcode</p>}</span>
         </div>
-        <button className="search-dogs" onClick={handleSearch}>Search</button>
-      </div>
-      
-    <div className='dogs-list'>
+      <div className='dogs-list'>
         {searchedDogs.map((dog) => (
             <DogDetailCard key={dog.dog_id} dog={dog} />
             ))}
-    </div>
+      </div>
   </>
   );
 }

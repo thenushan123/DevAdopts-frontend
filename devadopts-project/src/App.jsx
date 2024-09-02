@@ -30,9 +30,10 @@ function App() {
               <Route index element={<DogsDisplay />} />
               <Route path=":id" element={<DogDetailsPage />} />
             </Route>
-            <Route path="/AboutUs" element={<AboutPage />} />
-            <Route path="/Donate" element={<DonatePage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/AboutUs" element={<AboutPage />}/>
+            <Route path="/Donate" element={<DonatePage />}/>
+            <Route path="/UserProfile" element={<UserProfilePage />}/>
+            <Route path="*" element={<NotFoundPage />}/>
           </Route>
         </Routes>
       </DogsProvider>

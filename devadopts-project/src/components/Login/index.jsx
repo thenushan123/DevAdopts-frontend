@@ -41,8 +41,9 @@ export default function Login() {
                 setLoading(false);
                 if (response.status == 200) {
                     const data = await response.json();
+                    console.log(data);
                     setError('');
-                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("token", data.token);  
                     navigate('/home');
                 }
                 else {

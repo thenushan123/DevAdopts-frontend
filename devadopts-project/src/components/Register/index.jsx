@@ -33,6 +33,7 @@ export default function Register() {
         validatePostcode();
         validatePasswordMatch();
         if (!errorPostCode && !errorPasswordMatch){
+          setLoading(true);
           try{
             const options = {
               method: "POST",
@@ -42,16 +43,12 @@ export default function Register() {
               },
               body: JSON.stringify(formData)
             };
-            setLoading(true);
-            if (loading) return <div className="loading">Loading...</div>;
             const response = await fetch("http://localhost:3000/users/register", options);
             if (!response.ok) {
               setMessage('Unsuccessful Registration.');
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const data = await response.json();
-            if (data.id){
-              setLoading(false)
+              const data = await response.json();
               setMessage('Registered successfully.');
               setTimeout(() => {setMessage(''); navigate('/login');}, 5000);
               setFormData({
@@ -65,14 +62,15 @@ export default function Register() {
                 admin: false
               })
             }
-        }
           catch(e){
             console.log(e);
           }
-        }
-        else{
-          return;
-        }
+          finally{
+            setLoading(false)
+          }}
+          else{
+            return
+          }
       };
     
     const validatePostcode =()=>{
@@ -93,10 +91,9 @@ export default function Register() {
             setErrorPasswordMatch(false); 
         }
       };
-
-      if (loading) return <div className="loading">Registering user...</div>;
   return (
     <div className='container-register'>
+       {loading && <div className="loading">Registering user...</div>}
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
             <div>

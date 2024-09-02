@@ -7,3 +7,4 @@ export {default as DogsDisplay} from './DogsDisplayPage';
 export {default as DogDetailsPage} from './DogDetailsPage';
 export {default as AboutPage} from './AboutPage';
 export {default as DonatePage} from './DonatePage';
+export {default as UserProfilePage} from './UserProfilePage';

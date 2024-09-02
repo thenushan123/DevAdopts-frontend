@@ -1,5 +1,5 @@
 import './App.css'
-import { RegisterPage, NotFoundPage, LoginPage, HomePage, LandingPage, DogsDisplay, DogDetailsPage, AboutPage, DonatePage} from './pages';
+import { RegisterPage, NotFoundPage, LoginPage, HomePage, LandingPage, DogsDisplay, DogDetailsPage, AboutPage, DonatePage, UserProfilePage} from './pages';
 import { PageWrapper } from './components';
 import { UserProvider } from './contexts/UserContext';
 import { DogsProvider } from './contexts/DogsContext';
@@ -21,6 +21,7 @@ function App() {
             </Route>
             <Route path="/AboutUs" element={<AboutPage />}/>
             <Route path="/Donate" element={<DonatePage />}/>
+            <Route path="/UserProfile" element={<UserProfilePage />}/>
             <Route path="*" element={<NotFoundPage />}/>
           </Route>
         </Routes>

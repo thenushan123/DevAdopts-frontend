@@ -8,7 +8,7 @@ export default function ShowDogs() {
     const [postcode, setPostcode] = useState('');
     const [selectedBreed, setSelectedBreed] = useState("");
     const [errorPostCode, setErrorPostCode] = useState(false);
-    const [searchedDogs, setSearchedDogs] = useState(dogs)
+    const [searchedDogs, setSearchedDogs] = useState(dogs);
 
     useEffect(() => {
         async function displayDogsInformation() {

@@ -8,9 +8,10 @@ import {
   DogsDisplay,
   DogDetailsPage,
   AboutPage,
+  DonatePage,
 } from "./pages";
 import { PageWrapper } from "./components";
-import { UserProvider } from "./contexts/userContext";
+import { UserProvider } from "./contexts/UserContext";
 import { DogsProvider } from "./contexts/DogsContext";
 import { Route, Routes } from "react-router-dom";
 
@@ -29,6 +30,8 @@ function App() {
               <Route index element={<DogsDisplay />} />
               <Route path=":id" element={<DogDetailsPage />} />
             </Route>
+            <Route path="/AboutUs" element={<AboutPage />} />
+            <Route path="/Donate" element={<DonatePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -9,5 +9,11 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env': process.env
+  },
+  server: {
+    port: 4728
+  },
+  test: {
+    environment: 'jsdom'
   }
 })

@@ -1,0 +1,98 @@
+.donate-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+    margin-top: -80px;
+  }
+  
+  .donate-card {
+    background-color: #fff;
+    padding: 75px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(197, 94, 10, 0.1);
+    text-align: center;
+    width: 750px;
+  }
+  
+  .donate-title {
+    margin-bottom: 40px;
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .donation-type {
+    margin-bottom: 40px;
+  }
+  
+  .donation-button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 20px 40px;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .donation-button.active {
+    background-color: #ff774b;
+    color: white;
+  }
+  
+  .donation-button:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .donation-amount {
+    margin-bottom: 40px;
+  }
+  
+  .amount-options {
+    margin-bottom: 20px;
+  }
+  
+  .amount-button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 20px 40px;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .amount-button.active {
+    background-color: #ff774b;
+    color: white;
+  }
+  
+  .amount-button:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .custom-amount input {
+    width: calc(100% - 20px);
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+  
+  .submit-button {
+    background-color: #ff774b;
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+  }
+  
+  .submit-button:hover {
+    background-color: #e66c40;
+  }
+  

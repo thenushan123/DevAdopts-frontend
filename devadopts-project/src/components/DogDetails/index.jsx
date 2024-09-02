@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import AdoptionCosts from "../AdoptionCosts";
 
 export default function DogDetails() {
     const [dogData, setDogData] = useState({});
@@ -54,6 +55,8 @@ export default function DogDetails() {
           </div>
         </div>
       </div>
+      <hr/>
+      <AdoptionCosts id={id} />
     </div>
   )
 }

@@ -5,7 +5,9 @@ export default function About() {
   return (
     <div className="mainbody">
       <div className="about-section">
-        <h2>About Us</h2>
+        <div className="about-header">
+          <h2>About Us</h2>
+        </div>
         <div className="mission-section">
           <h1>Our Mission</h1>
           <p>
@@ -20,7 +22,7 @@ export default function About() {
       <div className="cards">
         <div className="card">
           <img
-            src="../../../public/images/dogforms.png"
+            src="../../../public/images/Streamline adoption.png"
             alt="man filling out form for dog"
           />
           <h3>Streamline Adoption</h3>
@@ -32,7 +34,7 @@ export default function About() {
 
         <div className="card">
           <img
-            src="../../../public/images/dog calculator.png"
+            src="../../../public/images/Make informed decisions.png"
             alt="calculator with dog"
           />
           <h3>Make Informed Decisions</h3>

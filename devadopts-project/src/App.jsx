@@ -9,6 +9,7 @@ import {
   DogDetailsPage,
   AboutPage,
   DonatePage,
+  UserProfilePage,
 } from "./pages";
 import { PageWrapper } from "./components";
 import { UserProvider } from "./contexts/UserContext";
@@ -30,10 +31,10 @@ function App() {
               <Route index element={<DogsDisplay />} />
               <Route path=":id" element={<DogDetailsPage />} />
             </Route>
-            <Route path="/AboutUs" element={<AboutPage />}/>
-            <Route path="/Donate" element={<DonatePage />}/>
-            <Route path="/UserProfile" element={<UserProfilePage />}/>
-            <Route path="*" element={<NotFoundPage />}/>
+            <Route path="/AboutUs" element={<AboutPage />} />
+            <Route path="/Donate" element={<DonatePage />} />
+            <Route path="/UserProfile" element={<UserProfilePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </DogsProvider>

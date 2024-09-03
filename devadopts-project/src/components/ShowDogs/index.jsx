@@ -11,6 +11,9 @@ export default function ShowDogs() {
     const [searchInitiated, setSearchInitiated] = useState(false);
     const [searchedDogs, setSearchedDogs] = useState(dogs);
     const [radius, setRadius] = useState(50);
+    const [favorites, setFavorites] = useState({});
+
+    console.log(dogs);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
       const R = 6371; // Radius of the earth in km
@@ -36,13 +39,14 @@ export default function ShowDogs() {
             return true;
         }
       };
+      const handleFavoriteToggle = (dogId) => {
+        setFavorites(prevFavorites => ({
+          ...prevFavorites,
+          [dogId]: !prevFavorites[dogId]
+        }));
+      };
       const handleSearch = async () =>{
-        setSearchInitiated(true);
-        // const response = await fetch('http://localhost:3000/dogs');
-        // const rawData = await response.json();
-        // const data = rawData.data;
-        // setDogs(data);
-
+        setSearchInitiated(true); 
         const dogsWithLatLng = await Promise.all(
         dogs.map(async (dog) =>{
           try{
@@ -112,7 +116,7 @@ export default function ShowDogs() {
         {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs}/>}
       <div className='dogs-list'>
         {searchedDogs.map((dog) => (
-            <DogDetailCard key={dog.dog_id} dog={dog} />
+            <DogDetailCard key={dog.dog_id} dog={dog} handleFavoriteToggle={handleFavoriteToggle} isFavorite={!!favorites[dog.dog_id]}/>
             ))}
       </div>
   </>

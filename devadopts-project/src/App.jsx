@@ -15,6 +15,9 @@ import { PageWrapper } from "./components";
 import { UserProvider } from "./contexts/UserContext";
 import { DogsProvider } from "./contexts/DogsContext";
 import { Route, Routes } from "react-router-dom";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 
 function App() {
   return (

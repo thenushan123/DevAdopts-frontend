@@ -12,7 +12,6 @@ export default function DogDetails() {
                 const response = await fetch(`http://localhost:3000/dogs/${parseInt(id)}`);
                 const rawData = await response.json();
                 const data = rawData.data;
-                console.log(data);
                 setDogData(data);
             }
             catch(err){
@@ -56,7 +55,7 @@ export default function DogDetails() {
         </div>
       </div>
       <hr/>
-      <AdoptionCosts id={id} />
+      <AdoptionCosts id={id}/>
     </div>
   )
 }

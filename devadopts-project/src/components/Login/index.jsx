@@ -39,11 +39,12 @@ export default function Login() {
                 setLoading(true);
                 const response = await fetch("http://localhost:3000/users/login", options);
                 setLoading(false);
-                if (response.status == 200) {
+                if (response.status === 200) {
                     const data = await response.json();
                     console.log(data);
                     setError('');
-                    localStorage.setItem("token", data.token);  
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("userId",data.user_id)
                     navigate('/home');
                 }
                 else {

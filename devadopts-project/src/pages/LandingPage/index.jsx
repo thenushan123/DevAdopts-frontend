@@ -5,8 +5,12 @@ import "./LandingPage.css";
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
+  const handleHomeButtonClick = () => {
     navigate('/Home');
+  };
+
+  const handleDogbotButtonClick = () => {
+    navigate('/DogsDisplay');
   };
 
   return (
@@ -43,10 +47,16 @@ const LandingPage = () => {
       <section className="section split-section">
         <img src="./images/DogSide.png" className="dogside-image" alt="Dog Side" />
         <div className="left-half">
-          <h2>Our Mission</h2>
+          <h2 className="title">
+            Find Your <span className="highlight-black">Perfect</span> Match!
+          </h2>
+          <button className="talk-to-dogbot-button" onClick={handleDogbotButtonClick}>
+            Talk to <span className="highlight-red">Dogbot</span> Now
+          </button>
         </div>
         <div className="right-half">
-          <button className="custom-button" onClick={handleButtonClick}>
+          <img src="./images/Map2.png" className="map-image" alt="Map" />
+          <button className="custom-button" onClick={handleHomeButtonClick}>
             <span className="highlight-orange">Don't Want To Be </span>
             <span className="highlight-red">Matched?</span>
             <br />

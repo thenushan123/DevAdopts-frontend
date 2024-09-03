@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f7f7f7;
-  margin-top: 300px;
+  background-color: #fef4eb;
+  margin-top: 50px;
 }
 
 .donate-card {
@@ -64,6 +64,7 @@
 
 .amount-options {
   margin-bottom: 20px;
+  gap: 50px;
 }
 .donation-amount h3 {
   margin-top: 60px;
@@ -79,6 +80,10 @@
   border-radius: 10px;
   cursor: pointer;
   font-size: 25px;
+}
+.amount-button.active {
+  background-color: #ff774b;
+  color: white;
 }
 
 .amount-button:hover {

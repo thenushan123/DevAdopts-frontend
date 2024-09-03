@@ -1,0 +1,43 @@
+* {
+  background-color: #fef4eb;
+  margin: auto;
+}
+
+.container {
+  padding: 100px;
+  display: inline-block;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.button {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #000;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.text {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.text1 {
+  background-color: #f7d0c5;
+  padding: 10px;
+  text-align: left;
+  padding-top: 40px;
+}
+
+.information-container {
+  background-color: #f7d0c5;
+  width: auto;
+  height: 100%;
+}
+
+.sidebar-container {
+  background-color: #fef4eb;
+  height: 100%;
+  width: auto;
+}

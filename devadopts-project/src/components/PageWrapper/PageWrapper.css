@@ -4,6 +4,8 @@
     background:none;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    display: flex; /* Add flexbox for layout */
+    justify-content: center; /* Center the navbar */
   }
 .navbar {
     /* background-color: rgba(255, 255, 255, 0.95); */

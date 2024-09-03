@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDogsDetail } from '../../contexts/DogsContext';
 import DogDetailCard from '../DogDetailCard';
 import './ShowDogs.css';
+import MapDisplay from '../MapDisplay';
 
 export default function ShowDogs() {
     const { dogs, setDogs} = useDogsDetail();
@@ -37,13 +38,13 @@ export default function ShowDogs() {
       };
       const handleSearch = async () =>{
         setSearchInitiated(true);
-        const response = await fetch('http://localhost:3000/dogs');
-        const rawData = await response.json();
-        const data = rawData.data;
-        setDogs(data);
+        // const response = await fetch('http://localhost:3000/dogs');
+        // const rawData = await response.json();
+        // const data = rawData.data;
+        // setDogs(data);
 
         const dogsWithLatLng = await Promise.all(
-        data.map(async (dog) =>{
+        dogs.map(async (dog) =>{
           try{
             const geoResponse = await fetch(`http://localhost:3000/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`);
             const geoData = await geoResponse.json();
@@ -74,7 +75,7 @@ export default function ShowDogs() {
             .sort((a, b) => a.distance - b.distance)
 
           setSearchedDogs(filteredDogs)
-          console.log('filtereddogs', filteredDogs);
+
         }
         else{
           setSearchedDogs(dogsWithLatLng);
@@ -86,7 +87,7 @@ export default function ShowDogs() {
         setSearchInitiated(false);
       }
     }
-    
+
   return (
   <>
     <h2>Find a dog to adopt</h2>
@@ -108,6 +109,7 @@ export default function ShowDogs() {
           <button className="search-dogs" onClick={handleSearch}>Search</button>
           <span>{searchInitiated && postcode==="" && <p style={{ color: 'red' }}>Please enter a postcode</p>}</span>
         </div>
+        {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs}/>}
       <div className='dogs-list'>
         {searchedDogs.map((dog) => (
             <DogDetailCard key={dog.dog_id} dog={dog} />

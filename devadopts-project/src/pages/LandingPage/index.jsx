@@ -1,19 +1,14 @@
-// import React from 'react';
-
-
-// export default function LandingPage() {
-//   return (
-//     <>
-//       <h1>Where Paws Meet Their Perfect Match!</h1>
-//     </>
-//   )
-// }
-
-
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import "./LandingPage.css";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/Home');
+  };
+
   return (
     <div className="landing-page">
       {/* First Section: Background Image with Card */}
@@ -26,20 +21,39 @@ const LandingPage = () => {
 
       {/* Second Section: White Page */}
       <section className="section white-section">
-        <h2>About Us</h2>
-        <p>
-          We provide exceptional services to our clients. Our team is dedicated
-          to ensuring your satisfaction.
-        </p>
+        <img src="./images/Decor1.png" className="decor-image" alt="Decorative Element 1" />
+        <img src="./images/Decor2.png" className="decor-image-bottom-left" alt="Decorative Element 2" />
+        <div className="content-container">
+          <div className="image-container">
+            <img src="./images/Dog1.png" className="dog1" alt="Dog 1" />
+            <img src="./images/Dog2.png" className="dog2" alt="Dog 2" />
+            <img src="./images/Dog3.png" className="dog3" alt="Dog 3" />
+            <img src="./images/Dog4.png" className="dog4" alt="Dog 4" />
+          </div>
+          <div className="text-container">
+            <p>
+              <span className="highlight-orange">Where Paws Meet Their Perfect</span>{" "}
+              <span className="highlight-red">Match!</span>
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Third Section: Split Color with Rounded Corners */}
       <section className="section split-section">
+        <img src="./images/DogSide.png" className="dogside-image" alt="Dog Side" />
         <div className="left-half">
           <h2>Our Mission</h2>
         </div>
         <div className="right-half">
-          <h2>Contact Us</h2>
+          <button className="custom-button" onClick={handleButtonClick}>
+            <span className="highlight-orange">Don't Want To Be </span>
+            <span className="highlight-red">Matched?</span>
+            <br />
+            <span className="highlight-orange">Start </span>
+            <span className="highlight-red">Searching</span>
+            <span className="highlight-orange"> Yourself!</span>
+          </button>
         </div>
       </section>
     </div>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import './DonatePage.css';
+import React, { useState } from "react";
+import "./DonatePage.css";
 
 const DonatePage = () => {
-  const [donationType, setDonationType] = useState('single');
-  const [selectedAmount, setSelectedAmount] = useState('');
-  const [customAmount, setCustomAmount] = useState('');
+  const [donationType, setDonationType] = useState("single");
+  const [selectedAmount, setSelectedAmount] = useState("");
+  const [customAmount, setCustomAmount] = useState("");
 
   const handleDonationTypeChange = (type) => {
     setDonationType(type);
@@ -12,11 +12,11 @@ const DonatePage = () => {
 
   const handleAmountSelect = (amount) => {
     setSelectedAmount(amount);
-    setCustomAmount('');
+    setCustomAmount("");
   };
 
   const handleCustomAmountChange = (e) => {
-    setSelectedAmount('');
+    setSelectedAmount("");
     setCustomAmount(e.target.value);
   };
 
@@ -24,11 +24,11 @@ const DonatePage = () => {
     const finalAmount = customAmount || selectedAmount;
     if (finalAmount) {
       alert(`Thank you for your ${donationType} donation of £${finalAmount}!`);
-      setDonationType('single');
-      setSelectedAmount('');
-      setCustomAmount('');
+      setDonationType("single");
+      setSelectedAmount("");
+      setCustomAmount("");
     } else {
-      alert('Please select or enter a donation amount.');
+      alert("Please select or enter a donation amount.");
     }
   };
 
@@ -38,16 +38,30 @@ const DonatePage = () => {
         <h2 className="donate-title">Make a Donation</h2>
         <div className="donation-type">
           <button
-            className={`donation-button ${donationType === 'single' ? 'active' : ''}`}
-            onClick={() => handleDonationTypeChange('single')}
+            className={`donation-button ${
+              donationType === "single" ? "active" : ""
+            }`}
+            onClick={() => handleDonationTypeChange("single")}
           >
-            Single
+            <img
+              src="../../../public/images/card-icon.png"
+              alt="Icon"
+              className="button-icon"
+            />
+            <span>Single</span>
           </button>
           <button
-            className={`donation-button ${donationType === 'monthly' ? 'active' : ''}`}
-            onClick={() => handleDonationTypeChange('monthly')}
+            className={`donation-button ${
+              donationType === "monthly" ? "active" : ""
+            }`}
+            onClick={() => handleDonationTypeChange("monthly")}
           >
-            Monthly
+            <img
+              src="../../../public/images/calendar-icon-donatepage.png"
+              alt="Icon"
+              className="button-icon"
+            />
+            <span>Monthly</span>
           </button>
         </div>
         <div className="donation-amount">
@@ -56,7 +70,9 @@ const DonatePage = () => {
             {[10, 20, 50].map((amount) => (
               <button
                 key={amount}
-                className={`amount-button ${selectedAmount === amount ? 'active' : ''}`}
+                className={`amount-button ${
+                  selectedAmount === amount ? "active" : ""
+                }`}
                 onClick={() => handleAmountSelect(amount)}
               >
                 £{amount}

@@ -1,0 +1,100 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+  }
+  
+  .landing-page {
+    scroll-behavior: smooth;
+  }
+  
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full screen height */
+    width: 100vw; /* Full screen width */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* First Section: Background Image with Card */
+  .background-image-section {
+    background: url('./Background Image.png') no-repeat center center/cover;
+    position: relative;
+  }
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .card p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  /* Second Section: White Page */
+  .white-section {
+    background-color: #FEF4EB;
+    text-align: center;
+  }
+  
+  .white-section h2 {
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .white-section p {
+    color: #555;
+    font-size: 1.2rem;
+    max-width: 60%;
+    margin: 0 auto;
+  }
+  
+/* Third Section: Split Color with Overlapping Effect */
+.split-section {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative; /* Allows the left-half to overlap the right-half */
+  }
+  
+  .left-half {
+    flex: 1; /* Take up one-third of the section */
+    max-width: 33.33%;
+    background-color: #CB4444; /* Red color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    position: relative;
+    z-index: 2; /* Ensure it appears above the orange section */
+    box-shadow: 10px 0 0 #CB4444; /* Creates the illusion of the red overlapping */
+  }
+  
+  .right-half {
+    flex: 2; /* Take up two-thirds of the section */
+    background-color: #FB8261; /* Orange color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    position: relative;
+    z-index: 1; /* Ensure it appears behind the red section */
+  }

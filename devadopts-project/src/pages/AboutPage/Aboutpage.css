@@ -1,6 +1,5 @@
 .mainbody {
-  background-color: #ff774b; /* Background color */
-  padding: 40px;
+  padding: 120px;
   border-radius: 20px;
   max-width: 1200px;
   margin: auto;
@@ -8,7 +7,7 @@
 
 .about-section {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 .about-header {
@@ -30,6 +29,7 @@
   background-color: #ff774b;
   padding: 30px;
   border-radius: 10px;
+  margin-top: 50px;
   margin-bottom: 40px;
   color: #ffffff;
 }

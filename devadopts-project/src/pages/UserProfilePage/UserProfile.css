@@ -1,10 +1,10 @@
-Styles for the entire Tabs container
+/* Styles for the entire Tabs container */
 .mb-3 {
 margin-bottom: 10rem;
-margin-top: 100px; 
+margin-top: 100px; /* Adjusts the margin below the tabs */
 }
   
-
+  /* Styles for individual Tab titles */
   .nav-tabs .nav-link {
     color: #555; /* Default color for the tab titles */
     padding: 5px 20px; /* Adds padding around the tab titles */

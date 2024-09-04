@@ -7,7 +7,10 @@ body, html {
 
 .landing-page {
     scroll-behavior: smooth;
+   
 }
+
+
 
 .section {
     display: flex;
@@ -169,7 +172,7 @@ body, html {
     justify-content: center;
     color: white;
     font-size: 2rem;
-    position: relative; /* Ensure that child elements can be positioned absolutely */
+    position: relative; 
     z-index: 1; 
 }
 
@@ -229,7 +232,7 @@ body, html {
 .map-image {
     position: absolute; 
     left: 45%; 
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%); 
     width: 600px; 
     height: auto; 
@@ -241,7 +244,7 @@ body, html {
 .title {
     font-size: 2.8rem; 
     color: white; 
-    margin: -800px 0 0 40px; 
+    margin: -750px 0 0 40px; 
    
 }
 
@@ -276,3 +279,23 @@ body, html {
     color: black; 
 }
 
+.logo-image {
+    position: absolute;
+    top: 55%; 
+    left: 30%;
+    transform: translate(-50%, -50%); 
+    width: 300px; 
+    height: auto; 
+    z-index: 4; 
+}
+
+.pawprints-image {
+    position: absolute;
+    top: 74%; 
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 300px; 
+    height: auto;
+    z-index: 4;
+    filter: hue-rotate(0deg) saturate(100%) brightness(50%); 
+}

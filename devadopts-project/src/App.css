@@ -1,4 +1,4 @@
-#root {
+/* #root {
   --primary-color: white;
   --secondary-color: grey;
   --accent-color: #fc642d;
@@ -9,18 +9,18 @@
 
 body {
   font-family: "Comfortaa", sans-serif;
-  color: darkslategray;
+  color: darkslategray; */
   /* max-width: 1280px; */
-  margin: 0 auto;
+  /* margin: 0 auto;
   padding: 4rem;
   text-align: center;
-  background-color: #fef4eb;
+  background-color: #fef4eb; */
   /* background-image: url('/images/dog-8006839_1920.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat; */
-}
+/* } */
 /* .logo {
   height: 6em;
   padding: 1.5em;

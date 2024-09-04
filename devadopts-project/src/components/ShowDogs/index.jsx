@@ -137,6 +137,7 @@ export default function ShowDogs() {
           <p style={{ color: "red" }}>Please enter a postcode</p>
         )}
       </div>
+
       {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs} />}
       <div className="dogs-list">
         {searchedDogs.map((dog) => (

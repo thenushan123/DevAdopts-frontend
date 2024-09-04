@@ -1,58 +1,57 @@
 /* FavoriteDogs.css */
 
 .favorite-dogs-container {
-    max-width: 800px; /* Set a maximum width for the container */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add padding around the content */
-    background-color: #f9f9f9; /* Light background color */
-  }
-  
-  .title {
-    text-align: center; /* Center-align the title */
-    color: #e74c3c; /* Title color */
-    margin-bottom: 20px; /* Space below the title */
-    font-size: 24px; /* Font size */
-  }
-  
-  .favorites-list {
-    display: flex; /* Use flexbox to arrange items */
-    flex-wrap: wrap; /* Wrap items if they don't fit */
-    gap: 15px; /* Space between cards */
-    justify-content: center; /* Center items horizontally */
-  }
-  
-  .favorite-dog-card {
-    background-color: #fff; /* White background for the card */
-    border: 1px solid #ddd; /* Border for the card */
-    padding: 15px; /* Padding inside the card */
-    border-radius: 8px; /* Rounded corners for the card */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    width: 200px; /* Fixed width for consistency */
-    text-align: center; /* Center-align text */
-  }
-  
-  .dog-link {
-    text-decoration: none; /* Remove underline from link */
-    color: #3498db; /* Link color */
-    font-weight: bold; /* Bold font */
-    display: block; /* Make the link take full width */
-    margin: 10px 0; /* Space around the link */
-    transition: color 0.3s; /* Smooth transition for color change */
-  }
-  
-  .dog-link:hover {
-    color: #e74c3c; /* Change color on hover */
-  }
-  .dog-photo {
-    width: 150px; /* Make the image take full width of the card */
-    height: 150px; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for the image */
-    margin-bottom: 10px; /* Space below the image */
-  }
-  
-  .dog-name {
-    display: block; /* Ensure the name is on a new line */
-    margin-top: 10px; /* Space above the name */
-    color: grey; /* Color for the dog's name */
-  }
-  
+  max-width: 800px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding around the content */
+  background-color: #f9f9f9; /* Light background color */
+}
+
+.favorite-dogs-title {
+  text-align: center; /* Center-align the title */
+  color: #e74c3c; /* Title color */
+  margin-bottom: 20px; /* Space below the title */
+  font-size: 24px; /* Font size */
+}
+
+.favorites-list {
+  display: flex; /* Use flexbox to arrange items */
+  flex-wrap: wrap; /* Wrap items if they don't fit */
+  gap: 15px; /* Space between cards */
+  justify-content: center; /* Center items horizontally */
+}
+
+.favorite-dog-card {
+  background-color: #fff; /* White background for the card */
+  border: 1px solid #ddd; /* Border for the card */
+  padding: 15px; /* Padding inside the card */
+  border-radius: 8px; /* Rounded corners for the card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: 200px; /* Fixed width for consistency */
+  text-align: center; /* Center-align text */
+}
+
+.dog-link {
+  text-decoration: none; /* Remove underline from link */
+  color: #3498db; /* Link color */
+  font-weight: bold; /* Bold font */
+  display: block; /* Make the link take full width */
+  margin: 10px 0; /* Space around the link */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.dog-link:hover {
+  color: #e74c3c; /* Change color on hover */
+}
+.dog-photo {
+  width: 150px; /* Make the image take full width of the card */
+  height: 150px; /* Maintain aspect ratio */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-bottom: 10px; /* Space below the image */
+}
+
+.dog-name {
+  display: block; /* Ensure the name is on a new line */
+  margin-top: 10px; /* Space above the name */
+  color: grey; /* Color for the dog's name */
+}

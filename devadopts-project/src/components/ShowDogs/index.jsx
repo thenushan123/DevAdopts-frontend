@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDogsDetail } from "../../contexts/DogsContext";
 import DogDetailCard from "../DogDetailCard";
 import "./ShowDogs.css";
@@ -13,64 +13,72 @@ export default function ShowDogs() {
   const [radius, setRadius] = useState(50);
   const [favorites, setFavorites] = useState({});
 
-  console.log(dogs);
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
-    const calculateDistance = (lat1, lon1, lat2, lon2) => {
-      const R = 6371; // Radius of the earth in km
-      const dLat = (lat2 - lat1) * (Math.PI / 180);  // deg2rad
-      const dLon = (lon2 - lon1) * (Math.PI / 180); 
-      const a = 
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
-        Math.sin(dLon / 2) * Math.sin(dLon / 2); 
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
-      const distance = R * c; // Distance in km
-      return distance;
-    };
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180); // deg2rad
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * (Math.PI / 180)) *
+        Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+  };
 
-      const validatePostcode =()=>{
-        const ukPostcodePattern = /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i;
-        if (!ukPostcodePattern.test(postcode)) {
-            setErrorPostCode(true)
-            return false;
-          } 
-        else  {
-            setErrorPostCode(false); 
-            return true;
-        }
-      };
-      const handleFavoriteToggle = (dogId) => {
-        setFavorites(prevFavorites => ({
-          ...prevFavorites,
-          [dogId]: !prevFavorites[dogId]
-        }));
-      };
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      const handleSearch = async () =>{
-        setSearchInitiated(true); 
-        const dogsWithLatLng = await Promise.all(
-        dogs.map(async (dog) =>{
-          try{
-            const geoResponse = await fetch(`http://localhost:3000/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`);
+  const validatePostcode = () => {
+    const ukPostcodePattern = /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i;
+    if (!ukPostcodePattern.test(postcode)) {
+      setErrorPostCode(true);
+      return false;
+    }
+    setErrorPostCode(false);
+    return true;
+  };
+
+  const handleFavoriteToggle = (dogId) => {
+    setFavorites((prevFavorites) => ({
+      ...prevFavorites,
+      [dogId]: !prevFavorites[dogId],
+    }));
+  };
+
+  const handleSearch = async () => {
+    setSearchInitiated(true);
+
+    try {
+      // Fetch geocode for all dogs and user's postcode
+      const dogsWithLatLng = await Promise.all(
+        dogs.map(async (dog) => {
+          try {
+            const geoResponse = await fetch(
+              `http://localhost:3000/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`
+            );
             const geoData = await geoResponse.json();
             const { latitude, longitude } = geoData.data;
             return { ...dog, latitude, longitude };
+          } catch (error) {
+            console.error(
+              `Error fetching geocode for postcode ${dog.shelter_location_postcode}:`,
+              error
+            );
+            return dog; // Return dog without location if there's an error
           }
-          catch(error){
-            console.error(`Error fetching geocode for postcode ${dog.shelter_location_postcode}:`, error);
-            return dog;
-          }
-        }
-      })
-    );
-    setDogs(dogsWithLatLng);
-    try {
-      if (postcode === "" || validatePostcode()) {
+        })
+      );
+
+      if (postcode === "" || !validatePostcode()) {
+        setSearchedDogs(dogsWithLatLng);
+      } else {
         const userGeoResponse = await fetch(
           `http://localhost:3000/maps/geocode/zip/?postcode=${postcode}`
         );
         const userGeoData = await userGeoResponse.json();
-
         const { latitude: userLat, longitude: userLng } = userGeoData.data;
 
         const filteredDogs = dogsWithLatLng
@@ -87,15 +95,15 @@ export default function ShowDogs() {
           .sort((a, b) => a.distance - b.distance);
 
         setSearchedDogs(filteredDogs);
-      } else {
-        setSearchedDogs(dogsWithLatLng);
       }
+
       setSearchInitiated(false);
     } catch (error) {
-      console.error("Error fetching user location geocode:", error);
+      console.error("Error during search:", error);
       setSearchInitiated(false);
     }
   };
+
   return (
     <div className="search-bar-main">
       <h2>Find a dog to adopt</h2>
@@ -107,11 +115,9 @@ export default function ShowDogs() {
           onChange={(e) => setPostcode(e.target.value)}
           placeholder="Enter your postcode"
         />
-        <span>
-          {errorPostCode && (
-            <p style={{ color: "red" }}>Please enter correct postcode</p>
-          )}
-        </span>
+        {errorPostCode && (
+          <p style={{ color: "red" }}>Please enter a correct postcode</p>
+        )}
         <label>Radius: {radius} km</label>
         <div className="slidecontainer">
           <input
@@ -127,11 +133,9 @@ export default function ShowDogs() {
         <button className="search-dogs" onClick={handleSearch}>
           Search
         </button>
-        <span>
-          {searchInitiated && postcode === "" && (
-            <p style={{ color: "red" }}>Please enter a postcode</p>
-          )}
-        </span>
+        {searchInitiated && postcode === "" && (
+          <p style={{ color: "red" }}>Please enter a postcode</p>
+        )}
       </div>
       {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs} />}
       <div className="dogs-list">

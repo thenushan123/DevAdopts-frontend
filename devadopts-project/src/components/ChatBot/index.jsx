@@ -1,15 +1,5 @@
 import {useState, useEffect} from "react";
 import { jwtDecode } from "jwt-decode";
-// import {
-//   MDBContainer,
-//   MDBRow,
-//   MDBCol,
-//   MDBCard,
-//   MDBCardHeader,
-//   MDBCardBody,
-//   MDBIcon,
-//   MDBTextArea,
-// } from "mdb-react-ui-kit";
 import './ChatBot.css';
 
 export default function App() {

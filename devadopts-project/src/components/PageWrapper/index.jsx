@@ -1,20 +1,25 @@
-import React ,{useEffect,useState}from "react";
+import React, { useEffect, useState } from "react";
 import "./PageWrapper.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { Logout } from "../index";
+import { jwtDecode } from "jwt-decode";
 
 export default function PageWrapper() {
-  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [userId, setUserId] = useState(null);
 
-  useEffect(()=>{
-    const handleStorageChange = () => {
-      setUserId(localStorage.getItem("userId"));
-    };
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {  
+      try {
+        const obj = jwtDecode(token);
+        const user_id = obj.user_id;
+        setUserId(user_id);
+      } catch (error) {
+        console.error("Invalid token:", error);
+      }
+    }
+  }, [userId]);
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function PageWrapper() {
             <h1>DevAdopts</h1>
           </div>
           <nav className="nav-links">
-          {!userId ? (
+            {!userId ? (
               <>
                 <NavLink to="/login">Login</NavLink>
                 <NavLink to="/register">Register</NavLink>

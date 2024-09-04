@@ -8,7 +8,7 @@ export default function App() {
     const callBackend = async () => {
         const token = localStorage.getItem("token");
         const obj = jwtDecode(token);
-        console.log("obj", obj)
+        console.log("obj", obj);
         const userId = obj.user_id
         console.log("userId", userId)
 

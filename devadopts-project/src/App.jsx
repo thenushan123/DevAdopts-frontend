@@ -1,4 +1,5 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   RegisterPage,
   NotFoundPage,
@@ -11,7 +12,7 @@ import {
   DonatePage,
   UserProfilePage,
 } from "./pages";
-import { PageWrapper } from "./components";
+import { Logout, PageWrapper } from "./components";
 import { UserProvider } from "./contexts/UserContext";
 import { DogsProvider } from "./contexts/DogsContext";
 import { Route, Routes } from "react-router-dom";
@@ -28,6 +29,7 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path="/Register" element={<RegisterPage />} />
             <Route path="/Login" element={<LoginPage />} />
+            <Route path="/Logout" element={<Logout />} />
             <Route path="/Home" element={<HomePage />} />
             <Route path="/About" element={<AboutPage />} />
             <Route path="/DogsDisplay">

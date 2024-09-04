@@ -27,7 +27,7 @@ export default function ShowDogs() {
       const distance = R * c; // Distance in km
       return distance;
     };
-  
+
       const validatePostcode =()=>{
         const ukPostcodePattern = /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i;
         if (!ukPostcodePattern.test(postcode)) {
@@ -45,6 +45,7 @@ export default function ShowDogs() {
           [dogId]: !prevFavorites[dogId]
         }));
       };
+      localStorage.setItem('favorites', JSON.stringify(favorites));
       const handleSearch = async () =>{
         setSearchInitiated(true); 
         const dogsWithLatLng = await Promise.all(

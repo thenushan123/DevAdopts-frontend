@@ -5,3 +5,5 @@ export { default as ChatBot } from "./ChatBot";
 export { default as ShowDogs } from "./ShowDogs";
 export { default as DogDetails } from "./DogDetails";
 export { default as AdoptionCosts } from "./AdoptionCosts";
+export { default as FavoriteDogs } from "./FavoriteDogs";
+export { default as Logout } from "./Logout";

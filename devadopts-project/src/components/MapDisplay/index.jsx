@@ -19,7 +19,16 @@ export default function MapDisplay({searchedDogs}) {
   useEffect(()=>{
     async function getAPIKey(){
       try{
-        const response = await fetch("http://localhost:3000/maps/reference/");
+        const options = {
+          method: "GET",
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("token")}`,
+          },
+      }
+        const response = await fetch("http://localhost:3000/maps/reference/",options);
+        console.log(response);
         const jsonResponse = await response.json()
         setApiKey(jsonResponse.data)
       }

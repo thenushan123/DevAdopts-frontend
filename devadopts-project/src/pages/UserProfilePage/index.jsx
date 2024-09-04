@@ -6,6 +6,7 @@ import "./userprofilepage.css";
 export default function UserProfilePage() {
   const [userDetails, setUserDetails] = useState(null);
   const token = localStorage.getItem("token");
+  console.log("token", token);
   const decodedtoken = jwtDecode(token);
   const userId = decodedtoken.userId;
 

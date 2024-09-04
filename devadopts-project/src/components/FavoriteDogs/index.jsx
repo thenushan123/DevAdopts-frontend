@@ -1,74 +1,22 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { useDogsDetail } from "../../contexts/DogsContext";
 import { Link } from "react-router-dom";
 import "./FavoriteDogs.css";
+import { useProfileContext } from "../../contexts/UserContext";
 
 export default function FavoriteDogs() {
-  const { dogs } = useDogsDetail();
-  const [favorites, setFavorites] = useState([]);
+  const { dogs } = useDogsDetail(); // Get list of all dogs
+  const [favorites, setFavorites] = useState([]); // State to store favorite dog IDs
+  const { loading, setLoading } = useProfileContext(); // Use loading state from context
 
   useEffect(() => {
+    setLoading(true); // Start loading
     const storedFavorites = JSON.parse(
       localStorage.getItem("favorites") || "{}"
     );
 
     const trueFavorites = Object.keys(storedFavorites).filter(
       (key) => storedFavorites[key] === true
-    );
-
-    setFavorites(trueFavorites);
-  }, []);
-  return (
-    <div className="favorite-dogs-container">
-      {" "}
-      {/* Apply class for styling */}
-      <h3 className="favorite-dogs-title">Favorite Dogs</h3>
-      <div className="favorites-list">
-        {" "}
-        {/* Wrap the list items */}
-        {favorites.map((dogId) => {
-          const dog = dogs.find((dog) => dog.dog_id === Number(dogId));
-          return (
-            <div key={dogId} className="favorite-dog-card">
-              {" "}
-              {/* Apply card styling */}
-              {dog ? (
-                <Link to={`/DogsDisplay/${dog.dog_id}`} className="dog-link">
-                  {" "}
-                  {/* Styled link */}
-                  <img
-                    src={dog.photo}
-                    alt={dog.dog_name}
-                    className="dog-photo"
-                  />
-                  <span className="dog-name">{dog.dog_name}</span>
-                </Link>
-              ) : (
-                <p>Dog not found</p>
-              )}
-            </div>
-          );
-        })}
-      </div>
-=======
-import React, { useState, useEffect } from 'react';
-import { useDogsDetail } from '../../contexts/DogsContext';
-import { Link } from 'react-router-dom';
-import './FavoriteDogs.css';
-import { useProfileContext } from '../../contexts/UserContext';
-
-export default function FavoriteDogs() {
-  const { dogs } = useDogsDetail();  // Get list of all dogs
-  const [favorites, setFavorites] = useState([]);  // State to store favorite dog IDs
-  const { loading, setLoading } = useProfileContext();  // Use loading state from context
-
-  useEffect(() => {
-    setLoading(true);  // Start loading
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites") || "{}");
-  
-    const trueFavorites = Object.keys(storedFavorites).filter(
-      key => storedFavorites[key] === true
     );
 
     setFavorites(trueFavorites);
@@ -80,20 +28,35 @@ export default function FavoriteDogs() {
   console.log("favorites", favorites);
 
   return (
-    <div className="favorite-dogs-container"> {/* Apply class for styling */}
+    <div className="favorite-dogs-container">
+      {" "}
+      {/* Apply class for styling */}
       <h3 className="favorite-title">Favorite Dogs</h3>
-      {loading ? (  // Show loading indicator
+      {loading ? ( // Show loading indicator
         <p>Loading favorite dogs...</p>
       ) : (
-        <div className="favorites-list"> {/* Wrap the list items */}
+        <div className="favorites-list">
+          {" "}
+          {/* Wrap the list items */}
           {favorites.length > 0 ? ( // Check if there are favorite dogs
             favorites.map((dogId) => {
-              const dog = dogs.find(dog => String(dog.dog_id) === dogId); // Ensure both are strings for comparison
+              const dog = dogs.find((dog) => String(dog.dog_id) === dogId); // Ensure both are strings for comparison
               return (
-                <div key={dogId} className="favorite-dog-card"> {/* Apply card styling */}
+                <div key={dogId} className="favorite-dog-card">
+                  {" "}
+                  {/* Apply card styling */}
                   {dog ? (
-                    <Link to={`/DogsDisplay/${dog.dog_id}`} className="dog-link">  {/* Styled link */}
-                      <img src={dog.photo} alt={dog.dog_name} className="dog-photo" />
+                    <Link
+                      to={`/DogsDisplay/${dog.dog_id}`}
+                      className="dog-link"
+                    >
+                      {" "}
+                      {/* Styled link */}
+                      <img
+                        src={dog.photo}
+                        alt={dog.dog_name}
+                        className="dog-photo"
+                      />
                       <span className="dog-name">{dog.dog_name}</span>
                     </Link>
                   ) : (
@@ -107,7 +70,6 @@ export default function FavoriteDogs() {
           )}
         </div>
       )}
->>>>>>> 0cb334f58d932034a0c05ce3d4b30cb374bf2b21
     </div>
   );
 }

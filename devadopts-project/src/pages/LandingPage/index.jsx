@@ -62,7 +62,7 @@ const LandingPage = () => {
   <div className="right-half">
     <img src="./images/Map2.png" className="map-image" alt="Map" />
     <button className="custom-button" onClick={handleHomeButtonClick}>
-      <span className="highlight-orange">Don't Want To Be </span>
+      <span className="highlight-orange">Don`&apos;`t Want To Be </span>
       <span className="highlight-red">Matched?</span>
       <br />
       <span className="highlight-orange">Start </span>

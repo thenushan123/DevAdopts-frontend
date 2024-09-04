@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDogsDetail } from '../../contexts/DogsContext';
 import { Link } from 'react-router-dom';
 import './FavoriteDogs.css';
-import { userProfileContext } from '../../contexts/UserContext';
+import { useProfileContext } from '../../contexts/UserContext';
 
 export default function FavoriteDogs() {
   const { dogs } = useDogsDetail();  // Get list of all dogs
   const [favorites, setFavorites] = useState([]);  // State to store favorite dog IDs
-  const { loading, setLoading } = userProfileContext();  // Use loading state from context
+  const { loading, setLoading } = useProfileContext();  // Use loading state from context
 
   useEffect(() => {
     setLoading(true);  // Start loading

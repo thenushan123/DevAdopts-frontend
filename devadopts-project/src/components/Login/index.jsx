@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
-import { userProfileContext } from '../../contexts/UserContext';
+import { useProfileContext } from '../../contexts/UserContext';
 
 export default function Login() {
-    const {loading, setLoading} = userProfileContext();
+    const {loading, setLoading, setToken} = useProfileContext();
     const [formData, setFormData] = useState({
         email:'',
         password: ''
@@ -43,7 +43,9 @@ export default function Login() {
                     const data = await response.json();
                     setError('');
                     localStorage.setItem("token", data.token);
-                    localStorage.setItem("userId",data.user_id)
+
+                    setToken(data.token);
+
                     navigate('/home');
                 }
                 else {

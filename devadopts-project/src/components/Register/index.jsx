@@ -162,7 +162,7 @@ export default function Register() {
                 />
             </div>
             <span>{errorPostCode && <p style={{ color: 'red' }}>Please enter correct postcode</p>}
-                    {errorPasswordMatch && <p style={{ color: 'red' }}>Passwords donot match</p>}
+                    {errorPasswordMatch && <p style={{ color: 'red' }}>Passwords donot match!</p>}
             </span>
             <button type="submit">Register</button>
         </form>

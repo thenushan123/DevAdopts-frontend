@@ -9,13 +9,17 @@ export default function App() {
     const [preference, setPreference] = useState({});
     const [botAnswer, setBotAnswer] = useState("");
     const [converations, setConversations] = useState([]);
-    const [startLoading, setStartLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [botHasInteracted, setBotHasInteracted] = useState(false);
     const [userInput, setUserInput] = useState("");
 
     const updateUserAnswer = async (e) => {
         e.preventDefault();
         const option = options(token, "PATCH");
+
+        if (userInput.length === 0) {
+            return;
+        }
 
         const length = converations.length;
 
@@ -44,7 +48,6 @@ export default function App() {
 
         option.body = JSON.stringify({ user_id: userId });
 
-        setStartLoading(true);
         const startBot = await fetch(`${process.env.REACT_URL}/bot/preferences`, option);
         if (startBot.status === 201) {
             const pref = await startBot.json();
@@ -64,15 +67,26 @@ export default function App() {
             if (preference.preference_id) {
                 const botInteraction = async () => {
                     const option = options(token, "GET");
-            
-                    const interaction = await fetch(`${process.env.REACT_URL}/bot/preferences/interact-with-bot/${preference.preference_id}`, option);
-                    if (interaction.status === 200) {
-                        const botQA = await interaction.json();
-                        setBotAnswer(botQA.data.answer);
-                        converations.unshift({ botQa: botQA.data.answer });
-                        converations.reverse();
-                        setConversations(converations);
+                    
+                    setLoading(true);
+                    converations.push({ load: true });
+                    const length = converations.length;
+                    try {
+                        const interaction = await fetch(`${process.env.REACT_URL}/bot/preferences/interact-with-bot/${preference.preference_id}`, option);
+                        if (interaction.status === 200) {
+                            const botQA = await interaction.json();
+                            setBotAnswer(botQA.data.answer);
+                            converations[length - 1] = { botQa: botQA.data.answer, load: false };
+                            // converations.unshift({ botQa: botQA.data.answer });
+                            // converations.reverse();
+                            setConversations(converations);
+                        }
+                    } catch (error) {
+                        console.error("Error during bot interaction", error)
+                    } finally {
+                        setLoading(false)
                     }
+
                 }
                 botInteraction();
                 setBotHasInteracted(true);
@@ -84,14 +98,16 @@ export default function App() {
     console.log("BOT ANSWER", botAnswer);
     console.log("user input", userInput);
     console.log("convo", converations);
+    console.log("loading", loading);
 
     return (
         <main className="chatbot-page">
             <section className="chatbot-container">
-                <SyncLoader />
+                {/* <SyncLoader /> */}
                 <div className="chatbot-search"><button>Search</button></div>
                 <div className="chatbot-discover"><button>Discover</button></div>
                 <div className="chatbot-board-container">
+
                     <div className="chatbot-interface">
                         <div className="chatbot-message-container">
                             <p className="chatbot-start-message">Start Chatting</p>
@@ -131,6 +147,26 @@ export default function App() {
                                                 }
 
                                             </>
+
+                                            <>
+                                            {
+                                                loading && info.load ? 
+                                                <div key={"Bot." + index} className="chatbot-ai-message-container">
+                                                    <div className="chatbot-ai-logo">
+                                                        <img src="/images/Logo.png" alt="dog logo" />
+                                                    </div>
+                                                    <div className="chatbot-ai-answer-loader">
+                                                        <SyncLoader 
+                                                            size={13}
+                                                            color="#FB8261"
+                                                        />
+                                                    </div>
+                                                </div>                                                    
+
+
+                                                : null
+                                            }
+                                            </>
                                         </>
                                     )
 
@@ -149,10 +185,10 @@ export default function App() {
                             />
                             <button className="user-text-send">Send</button>
                         </form>
-                    </div>
 
 
-                    
+
+                    </div>                    
                 </div>
             </section>
         </main>

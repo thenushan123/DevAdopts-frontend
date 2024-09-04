@@ -62,6 +62,8 @@
   overflow: hidden;
 }
 
+/* THE CHATBOX INTERFACE */
+
 .chatbot-interface {
   display: flex;
   flex-direction: column;
@@ -88,6 +90,23 @@
   font-size: 18px;
 }
 
+.chatbot-mini-container {
+  position: relative;
+}
+
+/* SPINNER LOADER */
+
+
+.chatbot-ai-answer-loader {
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* CHAT BOT BIT */
+
 .chatbot-ai-message-container {
   display: flex;
   align-items: flex-start;
@@ -107,6 +126,7 @@
   position: absolute;
 }
 
+
 .chatbot-ai-answer {
   background-color: #FB8261;
   color: white;
@@ -115,6 +135,8 @@
   max-width: 80%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* USER ANSWERS */
 
 .user-question-container {
   display: flex;
@@ -131,6 +153,8 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+
+/* USER FORM */
 
 .user-text-container {
   display: flex;

@@ -1,21 +1,3 @@
-/* .container-card {
-  color: darkslategrey;
-  background-color: white;
-  margin-top: 30px;
-  padding: 25px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: relative;
-  border-radius: 10px;
-}
-.favorite {
-  color: #e74c3c; 
-}
-
-.not-favorite {
-  color: #ccc; 
-} */
 .container-card {
   color: darkslategrey;
   background: linear-gradient(145deg, #f0f0f0, #ffffff);

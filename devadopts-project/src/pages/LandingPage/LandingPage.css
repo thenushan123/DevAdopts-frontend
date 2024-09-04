@@ -7,7 +7,10 @@ body, html {
 
 .landing-page {
     scroll-behavior: smooth;
+   
 }
+
+
 
 .section {
     display: flex;
@@ -19,33 +22,42 @@ body, html {
     margin: 0;
 }
 
-/* First Section: Background Image */
+
 .background-image-section {
     background: url('./Background Image.png') no-repeat center center/cover;
     position: relative;
 }
 
-.card {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+.cardlanding {
+    background-color: #FEF4EB; 
+    padding: 30px; 
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 35%; 
+    max-width: 900px; 
+    margin: 0 auto;
 }
 
-.card h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #333;
-}
 
 .card p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    color: #666;
+    font-weight: bold; 
 }
 
-/* Second Section: White */
+.card .highlight-orange {
+    color: #FB8261;
+}
+
+.card .highlight-red {
+    color: #CB4444; 
+}
+
+.card .highlight-red, .card .highlight-orange {
+    display: inline;
+}
+
+
+
 .white-section {
     background-color: #FEF4EB;
     position: relative; 
@@ -95,12 +107,12 @@ body, html {
 .text-container {
     flex: 1; 
     text-align: right; 
-    padding-right: 100px; 
+    padding-left: 200px;
 }
 
 .text-container p {
     font-size: 3rem; 
-    margin: 0; 
+    margin: -0; 
 }
 
 .highlight-orange {
@@ -111,11 +123,10 @@ body, html {
     color: #CB4444; 
 }
 
-
 .decor-image {
     position: absolute;
     top: 10px; 
-    right: 100px; 
+    right: 50px; 
     width: 100px;
     height: auto; 
 }
@@ -128,7 +139,7 @@ body, html {
     height: auto;
 }
 
-/* Third Section: Split Color */
+
 .split-section {
     display: flex;
     justify-content: center;
@@ -169,7 +180,7 @@ body, html {
     justify-content: center;
     color: white;
     font-size: 2rem;
-    position: relative; /* Ensure that child elements can be positioned absolutely */
+    position: relative; 
     z-index: 1; 
 }
 
@@ -229,7 +240,7 @@ body, html {
 .map-image {
     position: absolute; 
     left: 45%; 
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%); 
     width: 600px; 
     height: auto; 
@@ -241,7 +252,7 @@ body, html {
 .title {
     font-size: 2.8rem; 
     color: white; 
-    margin: -800px 0 0 40px; 
+    margin: -750px 0 0 40px; 
    
 }
 
@@ -276,3 +287,23 @@ body, html {
     color: black; 
 }
 
+.logo-image {
+    position: absolute;
+    top: 55%; 
+    left: 30%;
+    transform: translate(-50%, -50%); 
+    width: 300px; 
+    height: auto; 
+    z-index: 4; 
+}
+
+.pawprints-image {
+    position: absolute;
+    top: 74%; 
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 300px; 
+    height: auto;
+    z-index: 4;
+    filter: hue-rotate(0deg) saturate(100%) brightness(50%); 
+}

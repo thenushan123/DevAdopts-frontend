@@ -11,7 +11,7 @@ export const DogsProvider = ({ children }) => {
     displayDogs();
     
     async function displayDogs() {
-      const response = await fetch('http://localhost:3000/dogs');
+      const response = await fetch(`${process.env.REACT_URL}/dogs`);
       const rawData = await response.json();
       const data = rawData.data;
       setDogs(data);

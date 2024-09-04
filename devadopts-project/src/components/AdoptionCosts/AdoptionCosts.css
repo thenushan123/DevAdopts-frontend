@@ -1,0 +1,56 @@
+/* AdoptionCosts.css */
+
+.adoption-costs-container {
+    padding: 20px;
+    max-width: 600px;   
+    margin: 0 auto;
+    border-radius: 10px;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically (if needed) */
+    margin-bottom: 100px;
+  }
+  .adoption-header {
+    color: coral;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .adoption-button-container button {
+    margin: 0 10px; /* Optional: Space between buttons */
+  }
+  .adoption-costs-container button {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color : grey;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .adoption-btn {
+    width: 200px;
+  }
+  
+  .adoption-costs-container button:hover {
+    background-color: coral;
+  }
+  
+  .adoption-costs-container .cost-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+  }
+  
+  .adoption-costs-container .cost-details p {
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #34495e;
+  }
+  
+  .adoption-costs-container .cost-details strong {
+    color: #e74c3c;
+  }
+  

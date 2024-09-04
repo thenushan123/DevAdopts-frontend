@@ -1,4 +1,4 @@
-.container-card {
+.dog-detail-container-card {
     color: darkslategrey;
     background-color: white;
     padding: 25px;
@@ -12,5 +12,5 @@
   }
   
   .not-favorite {
-    color: #ccc; /* Grey heart when not favorite */
+    color: grey; /* Grey heart when not favorite */
   }

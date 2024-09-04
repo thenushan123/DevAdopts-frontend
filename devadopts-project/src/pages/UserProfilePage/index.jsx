@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import axios from "axios";
-import "./userprofilepage.css";
+import React, {useState, useEffect} from 'react';
+import {FavoriteDogs} from '../../components';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import './UserProfile.css'
+import axios from 'axios';
 
 export default function UserProfilePage() {
-  const [userDetails, setUserDetails] = useState(null);
-  const token = localStorage.getItem("token");
-  console.log("token", token);
-  const decodedtoken = jwtDecode(token);
-  const userId = decodedtoken.userId;
+  const [showFavoriteDogs, setShowFavoriteDogs] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [userDetails, setUserDetails] = useState({});
+  const token = localStorage.getItem("token")
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
 
   useEffect(() => {
     const getUser = async () => {
       try {
+        setLoading(true);  // Start loading
         const response = await axios.get(
           `http://localhost:3000/users/${userId}`,
           {
@@ -21,41 +25,42 @@ export default function UserProfilePage() {
             },
           }
         );
-        setUserDetails(response.data.data);
+        setUserDetails(response.data);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching user details:', error);
+      } finally {
+        setLoading(false);  // Stop loading
       }
     };
     getUser();
   }, [token, userId]);
-
-  console.log("userDeatils", userDetails);
-
-  if (userDetails) {
-    return (
-      <div className="container">
-        <div className="sidebar-container">
-          <div className="button">
-            <p className="text">Account Information</p>
-          </div>
-          <div className="button">
-            <p className="text">Preferences</p>
-          </div>
-          <div className="button">
-            <p className="text">Favourites</p>
-          </div>
-          <div className="button">
-            <p className="text">Donations</p>
-          </div>
-        </div>
-        <div className="information-container">
-          <p className="text1">First Name: {userDetails.first_name}</p>
-          <p className="text1">Surname: {userDetails.last_name}</p>
-          <p className="text1">Email: {userDetails.email}</p>
-        </div>
-      </div>
-    );
-  } else {
-    return <div>Loading</div>;
-  }
+console.log(userDetails);
+  return (
+    <Tabs
+    defaultActiveKey="profile"
+    id="fill-tab-example"
+    className="mb-3"
+    fill
+    >
+      <Tab eventKey="profile" title="Account Information">
+        {loading ? (  // Show loading state
+          <p>Loading user details...</p>
+        ) : userDetails && userDetails.data ? (  // Render user details if available
+          <>
+            <p>First Name: {userDetails.data.first_name}</p>
+            <p>Surname: {userDetails.data.last_name}</p>
+            <p>Email: {userDetails.data.email}</p>
+          </>
+        ) : (
+          <p>User details not found.</p>  // Show error if userDetails is null or undefined
+        )}
+      </Tab>
+      <Tab eventKey="favorites" title="Favorites">
+        <FavoriteDogs />
+      </Tab>
+      <Tab eventKey="contact" title="Contact">
+        Contact Us
+      </Tab>
+    </Tabs>
+  )
 }

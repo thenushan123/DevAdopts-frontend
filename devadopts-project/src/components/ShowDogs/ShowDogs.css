@@ -1,9 +1,14 @@
+.search-bar-main h2 {
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 20px;
+}
 .search-bar {
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
   background-color: #f4f4f4;
-  margin-top: 50px;
+  margin-top: 100px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

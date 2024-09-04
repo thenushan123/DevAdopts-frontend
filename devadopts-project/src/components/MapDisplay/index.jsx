@@ -27,7 +27,7 @@ export default function MapDisplay({searchedDogs}) {
               'Authorization': `Bearer ${localStorage.getItem("token")}`,
           },
       }
-        const response = await fetch("http://localhost:3000/maps/reference/",options);
+        const response = await fetch(`${process.env.REACT_URL}/maps/reference/`,options);
         console.log(response);
         const jsonResponse = await response.json()
         setApiKey(jsonResponse.data)

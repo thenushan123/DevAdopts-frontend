@@ -57,7 +57,7 @@ export default function ShowDogs() {
         dogs.map(async (dog) => {
           try {
             const geoResponse = await fetch(
-              `http://localhost:3000/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`
+              `${process.env.REACT_URL}/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`
             );
             const geoData = await geoResponse.json();
             const { latitude, longitude } = geoData.data;
@@ -76,7 +76,7 @@ export default function ShowDogs() {
         setSearchedDogs(dogsWithLatLng);
       } else {
         const userGeoResponse = await fetch(
-          `http://localhost:3000/maps/geocode/zip/?postcode=${postcode}`
+          `${process.env.REACT_URL}/maps/geocode/zip/?postcode=${postcode}`
         );
         const userGeoData = await userGeoResponse.json();
         const { latitude: userLat, longitude: userLng } = userGeoData.data;

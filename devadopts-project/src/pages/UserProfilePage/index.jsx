@@ -74,20 +74,6 @@ export default function UserProfilePage() {
           </div>
         )}
       </Tab>
-
-      {/* <Tab eventKey="profile" title="Account Information">
-        {loading ? ( // Show loading state
-          <p>Loading user details...</p>
-        ) : userDetails && userDetails.data ? ( // Render user details if available
-          <>
-            <p>First Name: {userDetails.data.first_name}</p>
-            <p>Surname: {userDetails.data.last_name}</p>
-            <p>Email: {userDetails.data.email}</p>
-          </>
-        ) : (
-          <p>User details not found.</p> // Show error if userDetails is null or undefined
-        )}
-      </Tab> */}
       <Tab eventKey="favorites" title="Favorites">
         <FavoriteDogs />
       </Tab>
@@ -175,44 +161,6 @@ export default function UserProfilePage() {
             </div>
           </div>
         </div>
-
-        {/* <div className="contactheader">
-          <p className="contactheader1">Contact Us</p>
-          <p className="contactheader2">
-            Hey! If you have any queries about the dogs, please make sure to
-            reach out to us!
-          </p>
-        </div>
-        <div className="contactcontainer">
-          <div className="Cformcontainer">
-            <p className="Cformtext">Name</p>
-            <input className="textbox1" type="text" name="name"></input>
-            <p className="Cformtext">Email</p>
-            <input className="textbox1" type="text" name="email"></input>
-            <p className="Cformtext">Phone Number</p>
-            <input className="textbox1" type="text" name="phone number"></input>
-            <p className="Cformtext">Message</p>
-            <textarea
-              className="textbox2"
-              type="text"
-              name="message"
-            ></textarea>
-            <button className="Cformbutton" type="submit">
-              Submit
-            </button>
-          </div>
-          <div className="Ctextcontainer">
-            <h4>Address</h4>
-            <p>
-              Address: 15 Paw Lane, Beagleborough, Barkshire, WD4 6DL, United
-              Kingdom
-            </p>
-            <h4>Contact Number</h4>
-            <p>Telephone Number: 020 7946 0123</p>
-            <h4>Email Address</h4>
-            <p>Email: contact@devadopts.co.uk</p>
-          </div>
-        </div> */}
       </Tab>
     </Tabs>
   );

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { useDogsDetail } from '../../contexts/DogsContext';
-import DogDetailCard from '../DogDetailCard';
-import './ShowDogs.css';
-import MapDisplay from '../MapDisplay';
+import React, { useState } from "react";
+import { useDogsDetail } from "../../contexts/DogsContext";
+import DogDetailCard from "../DogDetailCard";
+import "./ShowDogs.css";
+import MapDisplay from "../MapDisplay";
 
 export default function ShowDogs() {
-    const { dogs, setDogs} = useDogsDetail();
-    const [postcode, setPostcode] = useState('');
-    const [errorPostCode, setErrorPostCode] = useState(false);
-    const [searchInitiated, setSearchInitiated] = useState(false);
-    const [searchedDogs, setSearchedDogs] = useState(dogs);
-    const [radius, setRadius] = useState(50);
-    const [favorites, setFavorites] = useState({});
+  const { dogs, setDogs } = useDogsDetail();
+  const [postcode, setPostcode] = useState("");
+  const [errorPostCode, setErrorPostCode] = useState(false);
+  const [searchInitiated, setSearchInitiated] = useState(false);
+  const [searchedDogs, setSearchedDogs] = useState(dogs);
+  const [radius, setRadius] = useState(50);
+  const [favorites, setFavorites] = useState({});
 
-    console.log(dogs);
+  console.log(dogs);
 
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
       const R = 6371; // Radius of the earth in km
@@ -61,65 +61,89 @@ export default function ShowDogs() {
             return dog;
           }
         }
-      ));
-      setDogs(dogsWithLatLng);
-      try{
-        if(postcode === "" || validatePostcode())
-        {
-          const userGeoResponse = await fetch(`http://localhost:3000/maps/geocode/zip/?postcode=${postcode}`);
-          const userGeoData = await userGeoResponse.json();
+      })
+    );
+    setDogs(dogsWithLatLng);
+    try {
+      if (postcode === "" || validatePostcode()) {
+        const userGeoResponse = await fetch(
+          `http://localhost:3000/maps/geocode/zip/?postcode=${postcode}`
+        );
+        const userGeoData = await userGeoResponse.json();
 
-          const { latitude: userLat, longitude: userLng } = userGeoData.data;
+        const { latitude: userLat, longitude: userLng } = userGeoData.data;
 
-          const filteredDogs = dogsWithLatLng
-            .map((dog) => {
-              const distance = calculateDistance(userLat, userLng, dog.latitude, dog.longitude);
-              return { ...dog, distance };
-            })
-            .filter((dog) => dog.distance <= radius)
-            .sort((a, b) => a.distance - b.distance)
+        const filteredDogs = dogsWithLatLng
+          .map((dog) => {
+            const distance = calculateDistance(
+              userLat,
+              userLng,
+              dog.latitude,
+              dog.longitude
+            );
+            return { ...dog, distance };
+          })
+          .filter((dog) => dog.distance <= radius)
+          .sort((a, b) => a.distance - b.distance);
 
-          setSearchedDogs(filteredDogs)
-
-        }
-        else{
-          setSearchedDogs(dogsWithLatLng);
-        }
-        setSearchInitiated(false);
+        setSearchedDogs(filteredDogs);
+      } else {
+        setSearchedDogs(dogsWithLatLng);
       }
-      catch(error){
-        console.error('Error fetching user location geocode:', error);
-        setSearchInitiated(false);
-      }
+      setSearchInitiated(false);
+    } catch (error) {
+      console.error("Error fetching user location geocode:", error);
+      setSearchInitiated(false);
     }
-
+  };
   return (
-  <>
-    <h2>Find a dog to adopt</h2>
+    <div className="search-bar-main">
+      <h2>Find a dog to adopt</h2>
       <div className="search-bar">
+        <input
+          type="text"
+          className="search-input"
+          value={postcode}
+          onChange={(e) => setPostcode(e.target.value)}
+          placeholder="Enter your postcode"
+        />
+        <span>
+          {errorPostCode && (
+            <p style={{ color: "red" }}>Please enter correct postcode</p>
+          )}
+        </span>
+        <label>Radius: {radius} km</label>
+        <div className="slidecontainer">
           <input
-            type="text"
-            className="search-input"
-            value={postcode}
-            onChange={(e) => setPostcode(e.target.value)}
-            placeholder="Enter your postcode"
+            type="range"
+            min="1"
+            max="100"
+            value={radius}
+            onChange={(e) => setRadius(Number(e.target.value))}
+            className="slider"
+            id="myRange"
           />
-          <span>{errorPostCode && <p style={{ color: 'red' }}>Please enter correct postcode</p>}</span>
-          <label>
-            Radius: {radius} km
-          </label>
-          <div className="slidecontainer">
-            <input type="range" min="1" max="100" value={radius} onChange={(e) => setRadius(Number(e.target.value))} className="slider" id="myRange"/>
-          </div>
-          <button className="search-dogs" onClick={handleSearch}>Search</button>
-          <span>{searchInitiated && postcode==="" && <p style={{ color: 'red' }}>Please enter a postcode</p>}</span>
         </div>
-        {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs}/>}
-      <div className='dogs-list'>
-        {searchedDogs.map((dog) => (
-            <DogDetailCard key={dog.dog_id} dog={dog} handleFavoriteToggle={handleFavoriteToggle} isFavorite={!!favorites[dog.dog_id]}/>
-            ))}
+        <button className="search-dogs" onClick={handleSearch}>
+          Search
+        </button>
+        <span>
+          {searchInitiated && postcode === "" && (
+            <p style={{ color: "red" }}>Please enter a postcode</p>
+          )}
+        </span>
       </div>
-  </>
+      {searchedDogs.length > 0 && <MapDisplay searchedDogs={searchedDogs} />}
+      <div className="dogs-list">
+        {searchedDogs.map((dog) => (
+          <DogDetailCard
+            key={dog.dog_id}
+            dog={dog}
+            handleFavoriteToggle={handleFavoriteToggle}
+            isFavorite={!!favorites[dog.dog_id]}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

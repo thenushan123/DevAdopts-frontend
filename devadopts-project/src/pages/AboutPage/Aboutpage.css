@@ -1,5 +1,5 @@
 .mainbody {
-  padding: 120px;
+  padding: 160px;
   border-radius: 20px;
   max-width: 1200px;
   margin: auto;
@@ -13,21 +13,22 @@
 .about-header {
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 30px;
+  box-shadow: 0 0 8px #fb8261;
   margin-bottom: 20px;
   max-width: 400px;
   margin: 0 auto 20px auto;
 }
 
 .about-header h2 {
-  color: #ff774b;
+  color: #fb8261;
   font-size: 36px;
   margin: 0;
 }
 
 .mission-section {
-  background-color: #ff774b;
-  padding: 30px;
+  background-color: #fd8665;
+  padding: 20px;
   border-radius: 10px;
   margin-top: 50px;
   margin-bottom: 40px;
@@ -35,13 +36,13 @@
 }
 
 .mission-section h1 {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   font-size: 40px;
   color: #ffffff;
 }
 
 .mission-section p {
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.6;
 }
 

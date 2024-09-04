@@ -45,27 +45,29 @@ const LandingPage = () => {
 
       {/* Third Section: Split Color with Rounded Corners */}
       <section className="section split-section">
-        <img src="./images/DogSide.png" className="dogside-image" alt="Dog Side" />
-        <div className="left-half">
-          <h2 className="title">
-            Find Your <span className="highlight-black">Perfect</span> Match!
-          </h2>
-          <button className="talk-to-dogbot-button" onClick={handleDogbotButtonClick}>
-            Talk to <span className="highlight-red">Dogbot</span> Now
-          </button>
-        </div>
-        <div className="right-half">
-          <img src="./images/Map2.png" className="map-image" alt="Map" />
-          <button className="custom-button" onClick={handleHomeButtonClick}>
-            <span className="highlight-orange">Don't Want To Be </span>
-            <span className="highlight-red">Matched?</span>
-            <br />
-            <span className="highlight-orange">Start </span>
-            <span className="highlight-red">Searching</span>
-            <span className="highlight-orange"> Yourself!</span>
-          </button>
-        </div>
-      </section>
+  <img src="./images/DogSide.png" className="dogside-image" alt="Dog Side" />
+  <div className="left-half">
+  <h2 className="title">
+    Find Your <span className="highlight-black">Perfect</span> Match!
+  </h2>
+  <img src="./images/Logo.png" className="logo-image" alt="Logo" />
+  <img src="./images/PawPrints.png" className="pawprints-image" alt="Paw Prints" />
+  <button className="talk-to-dogbot-button" onClick={handleDogbotButtonClick}>
+    Talk to <span className="highlight-red">Dogbot</span> Now
+  </button>
+</div>
+  <div className="right-half">
+    <img src="./images/Map2.png" className="map-image" alt="Map" />
+    <button className="custom-button" onClick={handleHomeButtonClick}>
+      <span className="highlight-orange">Don't Want To Be </span>
+      <span className="highlight-red">Matched?</span>
+      <br />
+      <span className="highlight-orange">Start </span>
+      <span className="highlight-red">Searching</span>
+      <span className="highlight-orange"> Yourself!</span>
+    </button>
+  </div>
+</section>
     </div>
   );
 };

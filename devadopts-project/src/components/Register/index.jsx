@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate} from 'react-router-dom';
-import { userProfileContext } from '../../contexts/UserContext';
+import { useProfileContext } from '../../contexts/UserContext';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ export default function Register() {
     const [errorPasswordMatch, setErrorPasswordMatch] = useState(false);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-    const { loading, setLoading } = userProfileContext();
+    const { loading, setLoading } = useProfileContext();
 
     const handleChange = (e) => {
         setFormData({

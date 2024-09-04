@@ -1,17 +1,25 @@
-.search .search-bar-main h2 {
+/* .search-bar-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+*/
+.search-bar-main h2 {
   text-align: center;
-  margin-top: 200px;
-  margin-bottom: 20px;
+  margin-top: 140px;
+  margin-bottom: -80px;
+  font-size: 30px;
 }
 .search-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   /* justify-content: space-between; */
-  background-color: #f4f4f4;
+  background-color: #fef4eb;
   margin-top: 100px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   margin-bottom: 20px;
   gap: 15px;
 }
@@ -101,9 +109,9 @@ button.search-dogs:focus {
   margin-right: 20px;
 }
 .dogs-list {
-  margin-top: 50px;
+  margin: 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
-  background-color: #e9e7e6;
+  background-color: #fef4eb;
 }

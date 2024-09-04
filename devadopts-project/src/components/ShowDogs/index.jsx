@@ -99,7 +99,6 @@ export default function ShowDogs() {
       setSearchInitiated(false);
     }
   };
-
   return (
     <div className="search-bar-main">
       <h2>Find a dog to adopt</h2>

@@ -13,8 +13,8 @@ export default function Logout() {
               "Authorization": "Bearer " + token,
               "Accept": "application/json",
               "Content-Type": "application/json",
-              method: "GET"
-            }
+            },
+            method: "GET"
           }
           const response = await fetch(`${process.env.REACT_URL}/users/logout`,options)
           localStorage.removeItem("token");

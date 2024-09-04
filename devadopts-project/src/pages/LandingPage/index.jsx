@@ -15,15 +15,18 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      {/* First Section: Background Image with Card */}
-      <section className="section background-image-section">
-        <div className="card">
-          <h1>Welcome to Our Site</h1>
-          <p>Your journey starts here.</p>
-        </div>
-      </section>
 
-      {/* Second Section: White Page */}
+      <section className="section background-image-section">
+  <div className="cardlanding">
+    <h1 className="highlight-orange">Bring Them Home</h1>
+    <p>
+      Our mission at DevAdopts is simple, <span className="highlight-red">bridge the gap</span> between potential pet owners and rescue centres by leveraging <span className="highlight-red">AI technology</span>. This platform helps users communicate their preferences and needs, matching them with dogs that are the <span className="highlight-red">best fit</span> for their lifestyle. These loving dogs deserve a chance at a forever home, so let’s <span className="highlight-red">“Bring Them Home.”</span>
+    </p>
+  </div>
+</section>
+
+
+
       <section className="section white-section">
         <img src="./images/Decor1.png" className="decor-image" alt="Decorative Element 1" />
         <img src="./images/Decor2.png" className="decor-image-bottom-left" alt="Decorative Element 2" />
@@ -43,7 +46,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Third Section: Split Color with Rounded Corners */}
+
       <section className="section split-section">
   <img src="./images/DogSide.png" className="dogside-image" alt="Dog Side" />
   <div className="left-half">

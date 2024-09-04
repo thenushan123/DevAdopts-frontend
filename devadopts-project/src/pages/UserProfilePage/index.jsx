@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {FavoriteDogs} from '../../components';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { jwtDecode } from "jwt-decode";
 import './UserProfile.css'
 import axios from 'axios';
 
@@ -9,16 +10,17 @@ export default function UserProfilePage() {
   const [showFavoriteDogs, setShowFavoriteDogs] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userDetails, setUserDetails] = useState({});
-  const token = localStorage.getItem("token")
-  const userId = localStorage.getItem("userId");
-  console.log(userId);
+  const token = localStorage.getItem("token");
+  const obj = jwtDecode(token);
+  const user_id = obj.user_id
+  console.log("obj", obj)
 
   useEffect(() => {
     const getUser = async () => {
       try {
         setLoading(true);  // Start loading
         const response = await axios.get(
-          `http://localhost:3000/users/${userId}`,
+          `${process.env.REACT_URL}/users/${user_id}`,
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -33,7 +35,7 @@ export default function UserProfilePage() {
       }
     };
     getUser();
-  }, [token, userId]);
+  }, [token, user_id]);
 console.log(userDetails);
   return (
     <Tabs

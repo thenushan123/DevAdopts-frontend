@@ -9,7 +9,7 @@ export default function DogDetails() {
     useEffect(() => {
         async function searchAPI() {
             try{
-                const response = await fetch(`http://localhost:3000/dogs/${parseInt(id)}`);
+                const response = await fetch(`${process.env.REACT_URL}/dogs/${parseInt(id)}`);
                 const rawData = await response.json();
                 const data = rawData.data;
                 setDogData(data);

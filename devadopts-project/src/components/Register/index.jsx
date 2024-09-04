@@ -43,7 +43,7 @@ export default function Register() {
               },
               body: JSON.stringify(formData)
             };
-            const response = await fetch("http://localhost:3000/users/register", options);
+            const response = await fetch(`${process.env.REACT_URL}/users/register`, options);
             if (!response.ok) {
               setMessage('Unsuccessful Registration.');
               throw new Error(`HTTP error! Status: ${response.status}`);

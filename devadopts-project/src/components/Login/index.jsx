@@ -37,7 +37,7 @@ export default function Login() {
                     body: JSON.stringify(formData)
                 }
                 setLoading(true);
-                const response = await fetch("http://localhost:3000/users/login", options);
+                const response = await fetch(`${process.env.REACT_URL}/users/login`, options);
                 setLoading(false);
                 if (response.status === 200) {
                     const data = await response.json();

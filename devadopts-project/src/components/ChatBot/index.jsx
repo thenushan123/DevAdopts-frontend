@@ -1,119 +1,113 @@
-import React from "react";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardHeader,
-  MDBCardBody,
-  MDBIcon,
-  MDBTextArea,
-} from "mdb-react-ui-kit";
+import {useState, useEffect} from "react";
+import { jwtDecode } from "jwt-decode";
+// import {
+//   MDBContainer,
+//   MDBRow,
+//   MDBCol,
+//   MDBCard,
+//   MDBCardHeader,
+//   MDBCardBody,
+//   MDBIcon,
+//   MDBTextArea,
+// } from "mdb-react-ui-kit";
 import './ChatBot.css';
 
 export default function App() {
-    
-  return (
-    <MDBContainer className="py-5">
-      <MDBRow className="d-flex justify-content-center">
-        <MDBCol md="8" lg="6" xl="4">
-          <MDBCard id="chat1" style={{ borderRadius: "15px" }}>
-            <MDBCardHeader
-              className="d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
-              style={{
-                borderTopLeftRadius: "90px",
-                borderTopRightRadius: "15px",
-              }}
-            >
-              <MDBIcon fas icon="angle-left" />
-              <p className="mb-0 fw-bold">DogoBot</p>
-              <MDBIcon fas icon="times" />
-            </MDBCardHeader>
+    const [bot, setBot] = useState({});
 
-            <MDBCardBody>
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-                <div
-                  className="p-3 ms-3"
-                  style={{
-                    borderRadius: "15px",
-                    backgroundColor: "lightgrey",
-                  }}
-                >
-                  <p className="small mb-0">
-                    Hello and thank you for visiting MDBootstrap. Please click
-                    the video below.
-                  </p>
+    const callBackend = async () => {
+        const token = localStorage.getItem("token");
+        const obj = jwtDecode(token);
+        console.log("obj", obj)
+        const userId = obj.user_id
+        console.log("userId", userId)
+
+
+    }
+
+    useEffect(() => {
+        callBackend()
+    }, []);
+
+    return (
+        <main className="chatbot-page">
+            <section className="chatbot-container">
+                <div className="chatbot-search"><button>Search</button></div>
+                <div className="chatbot-discover"><button>Discover</button></div>
+                <div className="chatbot-board-container">
+                    <div className="chatbot-interface">
+                        <div className="chatbot-message-container">
+                            <p className="chatbot-start-message">Start Chatting</p>
+                        </div>
+                        <div className="chatbot-mini-container">
+                            {/* 1 */}
+                            <div className="chatbot-ai-message-container">
+                                <div className="chatbot-ai-logo">
+                                    <img src="/images/Logo.png" alt="dog logo" />
+                                </div>
+                                <div className="chatbot-ai-answer">
+                                    <p>How many small animals have you got?</p>
+                                </div>
+                            </div>
+
+                            <div className="user-question-container">
+                                <div className="user-ai-answer">
+                                    <p>Yes I have 2 hamsters</p>
+                                </div>
+                            </div>
+
+                            {/* 2 */}
+                            <div className="chatbot-ai-message-container">
+                                <div className="chatbot-ai-logo">
+                                    <img src="/images/Logo.png" alt="dog logo" />
+                                </div>
+                                <div className="chatbot-ai-answer">
+                                    <p>Have you got small children?</p>
+                                </div>
+                            </div>
+
+                            <div className="user-question-container">
+                                <div className="user-ai-answer">
+                                    <p>I have a baby girl</p>
+                                </div>
+                            </div>
+
+                            {/* 3 */}
+                            <div className="chatbot-ai-message-container">
+                                <div className="chatbot-ai-logo">
+                                    <img src="/images/Logo.png" alt="dog logo" />
+                                </div>
+                                <div className="chatbot-ai-answer">
+                                    <p>Based on your answers, here is what we recommend for dog breeds that would suit your lifestyle and preferences:
+                                        
+                                        1. **Goldendoodle**: This breed is known for its friendly disposition and hypoallergenic coat, making it a great choice for families with allergies. Goldendoodles are also great with children and other pets, and they enjoy being active.
+                                        
+                                        2. **Labradoodle**: Similar to the Goldendoodle, Labradoodles are intelligent, friendly, and hypoallergenic. They are excellent with children and can thrive in an active environment, making them a wonderful choice for your household.
+                                        
+                                        3. **Bernese Mountain Dog**: These gentle giants are known for their friendly nature and love for children. They are also quite social and can get along well with other animals. Their size and temperament make them suitable for families with plenty of space.
+                                        
+                                        4. **Standard Poodle**: Highly intelligent and easily trainable, Standard Poodles are another hypoallergenic option. They are energetic and love to engage in various activities, making them perfect for an active family.
+                                        
+                                        5. **Collie**: Collies are known for their gentle nature and protective instinct, which makes them good family dogs. They adapt well to living with other pets and need plenty of exercise, aligning with your active lifestyle.
+                                        
+                                        All these breeds have a friendly disposition, are good with children, and can accommodate your allergy concerns while being suitable for living with other animals.</p>
+                                </div>
+                            </div>
+
+                            <div className="user-question-container">
+                                <div className="user-ai-answer">
+                                    <p>Start </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className="user-text-container">
+                            <input type="text" className="user-text-input" placeholder="Type your message..." />
+                            <button className="user-text-send">Send</button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div className="d-flex flex-row justify-content-end mb-4">
-                <div
-                  className="p-3 me-3 border"
-                  style={{ borderRadius: "15px", backgroundColor: "#fbfbfb" }}
-                >
-                  <p className="small mb-0">
-                    Thank you, I really like your product.
-                  </p>
-                </div>
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-              </div>
-
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-                <div className="ms-3" style={{ borderRadius: "15px" }}>
-                  <div className="bg-image">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp"
-                      style={{ borderRadius: "15px" }}
-                      alt="video"
-                    />
-                    <a href="#!">
-                      <div className="mask"></div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-                <div
-                  className="p-3 ms-3"
-                  style={{
-                    borderRadius: "15px",
-                    backgroundColor: "rgba(57, 192, 237,.2)",
-                  }}
-                >
-                  <p className="small mb-0">...</p>
-                </div>
-              </div>
-
-              <MDBTextArea
-                className="form-outline"
-                label="Type your message"
-                id="textAreaExample"
-                rows={4}
-              />
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-  );
+            </section>
+        </main>
+    );
 }

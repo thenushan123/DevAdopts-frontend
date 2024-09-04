@@ -1,75 +1,156 @@
-#chat1 .form-outline ~ .form-notch div {
-    pointer-events: none;
-    border: 1px solid;
-    border-color: #eee;
-    box-sizing: border-box;
-    background: transparent;
-  }
-  
-  #chat1 .form-outline ~ .form-notch .form-notch-leading {
-    left: 0;
-    top: 0;
-    height: 100%;
-    border-right: none;
-    border-radius: 0.65rem 0 0 0.65rem;
-  }
-  
-  #chat1 .form-outline ~ .form-notch .form-notch-middle {
-    flex: 0 0 auto;
-    max-width: calc(100% - 1rem);
-    height: 100%;
-    border-right: none;
-    border-left: none;
-  }
-  
-  #chat1 .form-outline ~ .form-notch .form-notch-trailing {
-    flex-grow: 1;
-    height: 100%;
-    border-left: none;
-    border-radius: 0 0.65rem 0.65rem 0;
-  }
-  
-  #chat1 .form-outline:focus ~ .form-notch .form-notch-leading {
-    border-top: 0.125rem solid #39c0ed;
-    border-bottom: 0.125rem solid #39c0ed;
-    border-left: 0.125rem solid #39c0ed;
-  }
-  
-  #chat1 .form-outline:focus ~ .form-notch .form-notch-leading,
-  #chat1 .form-outline.active ~ .form-notch .form-notch-leading {
-    border-right: none;
-    transition: all 0.2s linear;
-  }
-  
-  #chat1 .form-outline:focus ~ .form-notch .form-notch-middle {
-    border-bottom: 0.125rem solid;
-    border-color: #39c0ed;
-  }
-  
-  #chat1 .form-outline:focus ~ .form-notch .form-notch-middle,
-  #chat1 .form-outline.active ~ .form-notch .form-notch-middle {
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    transition: all 0.2s linear;
-  }
-  
-  #chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-trailing {
-    border-top: 0.125rem solid #39c0ed;
-    border-bottom: 0.125rem solid #39c0ed;
-    border-right: 0.125rem solid #39c0ed;
-  }
-  
-  #chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-trailing,
-  #chat1 .form-outline .form-control.active ~ .form-notch .form-notch-trailing {
-    border-left: none;
-    transition: all 0.2s linear;
-  }
-  
-  #chat1 .form-outline .form-control:focus ~ .form-label {
-    color: #39c0ed;
-  }
-  
-  #chat1 .form-outline .form-control ~ .form-label {
-    color: #bfbfbf;
-  }
+.chatbot-page {
+  background-image: url("/images/Background Image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin-top: -50px;
+  position: relative;
+  border: 1px solid red;
+}
+
+.chatbot-container {
+  background-color: coral;
+  height: 600px;
+  width: 50%;
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 25%;
+  right: 25%;
+  display: grid;
+  row-gap: 20px;
+  grid-template-columns: 0.2fr 0.7fr 0.3fr 0.7fr 0.2fr;
+  grid-template-rows: 0.1fr 1fr;
+  grid-template-areas: ". search-bot-ai . discover-bot-ai ."
+                      ". board board board .";
+  overflow-y: auto;
+}
+
+.chatbot-search {
+  grid-area: search-bot-ai;
+  width: 100%;
+  padding: 20px;
+}
+
+.chatbot-discover {
+  grid-area: discover-bot-ai;
+  width: 100%;
+  padding: 20px;
+}
+
+.chatbot-search button, .chatbot-discover button {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background-color: #FFFFFF;
+  font-size: 30px;
+  font-weight: 700;
+  color: #FB8261;
+  border-radius: 20px;
+}
+
+.chatbot-board-container {
+  grid-area: board;
+  width: 75%;
+  height: 90%;
+  background-color: #E3E2E2;
+  margin: 0 auto;
+}
+
+.chatbot-interface {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chatbot-message-container {
+  grid-column: 2;
+  grid-row: 1;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.chatbot-start-message {
+  text-align: center;
+  color: #888888;
+  font-size: 18px;
+}
+
+.chatbot-ai-message-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.chatbot-ai-logo {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin-right: 10px;
+}
+
+.chatbot-ai-logo img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.chatbot-ai-answer {
+  background-color: #FB8261;
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-question-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.user-ai-answer {
+  background-color: #FFFFFF;
+  color: #333333;
+  padding: 15px;
+  border-radius: 15px;
+  max-width: 70%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.user-text-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding: 15px;
+  background-color: #FB8261;
+  border-radius: 15px;
+}
+
+.user-text-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #E3E2E2;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+
+.user-text-send {
+  padding: 10px 20px;
+  background-color: white;
+  color: #FB8261;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}

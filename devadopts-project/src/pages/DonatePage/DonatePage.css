@@ -1,0 +1,115 @@
+.donate-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fef4eb;
+  margin-top: 50px;
+}
+
+.donate-card {
+  background-color: #fff;
+  padding: 75px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(197, 94, 10, 0.1);
+  text-align: center;
+  width: 600px;
+}
+
+.donate-title {
+  margin-top: -20px;
+  margin-bottom: 60px;
+  font-size: 50px;
+  color: #333;
+}
+
+.donation-type {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* This centers the buttons horizontally */
+  gap: 60px; /* Adds space between the buttons */
+}
+
+.donation-button {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.donation-button .button-icon {
+  width: 24px; /* Adjust the size of the icon */
+  height: 24px;
+  margin-bottom: 8px; /* Space between the icon and text */
+}
+
+.donation-button.active {
+  background-color: #ff774b;
+  color: white;
+}
+
+.donation-button:hover {
+  background-color: #d0d0d0;
+}
+
+.donation-amount {
+  margin-bottom: 40px;
+}
+
+.amount-options {
+  margin-bottom: 20px;
+  gap: 50px;
+}
+.donation-amount h3 {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  font-size: 30px;
+  color: #333;
+}
+.amount-button {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 20px 40px;
+  margin: 0 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 25px;
+}
+.amount-button.active {
+  background-color: #ff774b;
+  color: white;
+}
+
+.amount-button:hover {
+  background-color: #ff774b;
+}
+
+.custom-amount input {
+  width: calc(100% - 20px);
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.submit-button {
+  background-color: #ff774b;
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 20px;
+}
+
+.submit-button:hover {
+  background-color: #e66c40;
+}

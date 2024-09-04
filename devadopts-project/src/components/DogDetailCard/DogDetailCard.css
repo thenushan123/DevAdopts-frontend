@@ -1,0 +1,82 @@
+.container-card {
+  color: darkslategrey;
+  background: linear-gradient(145deg, #f0f0f0, #fef4eb);
+  margin-top: 30px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
+  max-width: 450px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+}
+
+.container-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-image-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 15px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  margin-bottom: 20px;
+}
+
+.dog-name {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.dog-info {
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #010000;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.favorite {
+  color: #e74c3c; /* Red heart when favorite */
+}
+
+.not-favorite {
+  color: #ccc; /* Grey heart when not favorite */
+}
+
+.more-info-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 15px 20px;
+  background-color: #fb8261;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.more-info-link:hover {
+  background-color: #c0392b;
+}

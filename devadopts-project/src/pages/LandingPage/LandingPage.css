@@ -1,0 +1,309 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.landing-page {
+    scroll-behavior: smooth;
+   
+}
+
+
+
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    width: 100vw; 
+    padding: 0;
+    margin: 0;
+}
+
+
+.background-image-section {
+    background: url('./Background Image.png') no-repeat center center/cover;
+    position: relative;
+}
+
+.cardlanding {
+    background-color: #FEF4EB; 
+    padding: 30px; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 35%; 
+    max-width: 900px; 
+    margin: 0 auto;
+}
+
+
+.card p {
+    font-weight: bold; 
+}
+
+.card .highlight-orange {
+    color: #FB8261;
+}
+
+.card .highlight-red {
+    color: #CB4444; 
+}
+
+.card .highlight-red, .card .highlight-orange {
+    display: inline;
+}
+
+
+
+.white-section {
+    background-color: #FEF4EB;
+    position: relative; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%; 
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+    width: 60%; 
+    margin-top: 100px; 
+}
+
+.white-section img {
+    width: 300px; 
+    height: auto; 
+    margin-right: 20px; 
+}
+
+.dog1 {
+    margin-top: -150px;
+}
+
+.dog2 {
+    margin-top: 0; 
+}
+
+.dog3 {
+    margin-top: -150px; 
+}
+
+.dog4 {
+    margin-top: 0; 
+}
+
+.text-container {
+    flex: 1; 
+    text-align: right; 
+    padding-left: 200px;
+}
+
+.text-container p {
+    font-size: 3rem; 
+    margin: -0; 
+}
+
+.highlight-orange {
+    color: #FB8261; 
+}
+
+.highlight-red {
+    color: #CB4444; 
+}
+
+.decor-image {
+    position: absolute;
+    top: 10px; 
+    right: 50px; 
+    width: 100px;
+    height: auto; 
+}
+
+.decor-image-bottom-left {
+    position: absolute;
+    bottom: 20px; 
+    left: 20px; 
+    width: 100px; 
+    height: auto;
+}
+
+
+.split-section {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    position: relative; 
+}
+
+.left-half, .right-half {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+.left-half {
+    flex: 1; 
+    
+    background-color: #CB4444; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    position: relative;
+    z-index: 2; 
+    margin-right: -350px; 
+}
+
+.right-half {
+    flex: 2; 
+    background-color: #FB8261; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    position: relative; 
+    z-index: 1; 
+}
+
+.dogside-image {
+    position: absolute;
+    top: 0px; 
+    right: 0;
+    width: 550px; 
+    height: auto; 
+    z-index: 3; 
+}
+
+
+.custom-button {
+    background-color: #F8EDE3; 
+    color: #FB8261; 
+    border: none; 
+    border-radius: 25px; 
+    padding: 20px 60px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer; 
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, color 0.3s; 
+    width: 80%; 
+    max-width: 800px;
+    position: absolute;
+    bottom: 100px; 
+    left: 60%;
+    transform: translateX(-50%); 
+}
+
+
+.highlight-orange {
+    color: #FB8261; 
+}
+
+.highlight-red {
+    color: #CB4444; 
+}
+
+
+.custom-button:hover {
+    background-color: #F4D8C1; 
+    color: #CB4444; 
+}
+
+
+.custom-button:focus {
+    outline: 2px solid #CB4444; 
+    outline-offset: 2px;
+}
+
+.map-image {
+    position: absolute; 
+    left: 45%; 
+    top: 45%;
+    transform: translate(-50%, -50%); 
+    width: 600px; 
+    height: auto; 
+    z-index: 2; 
+}
+
+
+
+.title {
+    font-size: 2.8rem; 
+    color: white; 
+    margin: -750px 0 0 40px; 
+   
+}
+
+
+.talk-to-dogbot-button {
+    background-color: #F8EDE3; 
+    color: #FB8261; 
+    border: none; 
+    border-radius: 25px; 
+    padding: 30px 40px; 
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center; 
+    display: block; 
+    margin: 0 auto;
+    cursor: pointer; 
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, color 0.3s; 
+    width: 80%; 
+    max-width: 300px;
+    position: absolute;
+    bottom: 600px; 
+    left: 70%;
+    transform: translateX(-50%); 
+    white-space: normal; 
+    line-height: 1.2; 
+}
+
+
+
+.highlight-black {
+    color: black; 
+}
+
+.logo-image {
+    position: absolute;
+    top: 55%; 
+    left: 30%;
+    transform: translate(-50%, -50%); 
+    width: 300px; 
+    height: auto; 
+    z-index: 4; 
+}
+
+.pawprints-image {
+    position: absolute;
+    top: 74%; 
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 300px; 
+    height: auto;
+    z-index: 4;
+    filter: hue-rotate(0deg) saturate(100%) brightness(50%); 
+}

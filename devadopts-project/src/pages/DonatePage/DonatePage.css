@@ -13,7 +13,8 @@
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(197, 94, 10, 0.1);
   text-align: center;
-  width: 600px;
+  width: 800px;
+  margin-bottom: -20px; 
 }
 
 .donate-title {

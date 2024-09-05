@@ -14,12 +14,12 @@ export default function PageWrapper() {
         <div className="navbar">
           <div className="brand">
             <img
-              src="your-icon-path.png"
+              src="/images/DevAdopts_Logo.PNG"
               alt="DevAdopts Logo"
               className="brand-icon"
             />
             <NavLink to='/'>
-              <h1>DevAdopts</h1>
+              <h1 style={{color:"black"}}>DevAdopts</h1>
             </NavLink>
           </div>
           <nav className="nav-links">

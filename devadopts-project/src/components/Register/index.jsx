@@ -173,7 +173,7 @@ export default function Register() {
             {errorPostCode && <p style={{ color: 'red' }}>Please enter correct postcode</p>}
             {errorPasswordMatch && <p style={{ color: 'red' }}>Passwords don’t match!</p>}
           </span>
-          <button type="submit">Register</button>
+          <button type="submit" role="button">Register</button>
         </form>
         <p style={{ color: 'grey' }}>Already a user? <Link to="/login">Login</Link></p>
         <p className='message-success'>{message}</p>

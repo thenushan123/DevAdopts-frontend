@@ -22,7 +22,7 @@ export default function About() {
       <div className="cards">
         <div className="card">
           <img
-            src="../../../public/images/Streamline adoption.png"
+            src="/images/Streamline adoption.png"
             alt="man filling out form for dog"
           />
           <h3>Streamline Adoption</h3>
@@ -34,7 +34,7 @@ export default function About() {
 
         <div className="card">
           <img
-            src="../../../public/images/Make informed decisions.png"
+            src="/images/Make informed decisions.png"
             alt="calculator with dog"
           />
           <h3>Make Informed Decisions</h3>

@@ -3,17 +3,23 @@ import { useDogsDetail } from "../../contexts/DogsContext";
 import DogDetailCard from "../DogDetailCard";
 import "./ShowDogs.css";
 import MapDisplay from "../MapDisplay";
+import { useProfileContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function ShowDogs() {
   const { dogs, setDogs } = useDogsDetail();
   const [postcode, setPostcode] = useState("");
   const [errorPostCode, setErrorPostCode] = useState(false);
   const [searchInitiated, setSearchInitiated] = useState(false);
-  const [searchedDogs, setSearchedDogs] = useState(dogs);
+  const [searchedDogs, setSearchedDogs] = useState([]);
   const [radius, setRadius] = useState(50);
   const [favorites, setFavorites] = useState({});
-
+  const {loading, setLoading} =useProfileContext();
+  
   useEffect(() => {
+    setSearchedDogs(dogs)
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
@@ -50,11 +56,12 @@ export default function ShowDogs() {
 
   const handleSearch = async () => {
     setSearchInitiated(true);
-
+    setLoading(true)
     try {
       // Fetch geocode for all dogs and user's postcode
       const dogsWithLatLng = await Promise.all(
         dogs.map(async (dog) => {
+          
           try {
             const geoResponse = await fetch(
               `${process.env.REACT_URL}/maps/geocode/zip/?postcode=${dog.shelter_location_postcode}`
@@ -67,14 +74,16 @@ export default function ShowDogs() {
               `Error fetching geocode for postcode ${dog.shelter_location_postcode}:`,
               error
             );
-            return dog; // Return dog without location if there's an error
+            return dog; 
           }
         })
       );
 
       if (postcode === "" || !validatePostcode()) {
         setSearchedDogs(dogsWithLatLng);
-      } else {
+      } 
+      else {
+        try{
         const userGeoResponse = await fetch(
           `${process.env.REACT_URL}/maps/geocode/zip/?postcode=${postcode}`
         );
@@ -95,10 +104,15 @@ export default function ShowDogs() {
           .sort((a, b) => a.distance - b.distance);
 
         setSearchedDogs(filteredDogs);
+        }
+        catch(error){
+          console.error("Error fetching user geocode:", error);
+        }
       }
-
+      setLoading(false);
       setSearchInitiated(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error during search:", error);
       setSearchInitiated(false);
     }
@@ -113,7 +127,7 @@ export default function ShowDogs() {
           className="search-input"
           value={postcode}
           onChange={(e) => setPostcode(e.target.value)}
-          placeholder="Enter your postcode"
+          placeholder="Search by postcode or breed"
         />
         {errorPostCode && (
           <p style={{ color: "red" }}>Please enter a correct postcode</p>
@@ -149,6 +163,11 @@ export default function ShowDogs() {
           />
         ))}
       </div>
+      {loading ? (
+        <div className="loading-container-dogsdisplay">
+          <FontAwesomeIcon icon={faSpinner} pulse size="5x" />
+        </div>
+        ) : null}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useProfileContext } from "../../contexts/UserContext";
 import { options, requiredAIKeys } from "../../utils/helpers";
 import SyncLoader from "react-spinners/SyncLoader";
 import './ChatBot.css';
+import {Link} from 'react-router-dom';
 
 export default function App() {
     const { token, userId } = useProfileContext();
@@ -105,7 +106,7 @@ export default function App() {
         <main className="chatbot-page">
             <section className="chatbot-container">
                 {/* <SyncLoader /> */}
-                <div className="chatbot-search"><button>Search</button></div>
+                <div className="chatbot-search"><Link to='/DogsDisplay'><button>Search</button></Link></div>
                 <div className="chatbot-discover"><button>Discover</button></div>
                 <div className="chatbot-board-container">
 

@@ -1,12 +1,18 @@
+.container-login-page{
+  background-color: #fef4eb;
+  height: 100vh;
+  padding-top: 70px;
+}
 .container-login {
   width: 100%;
   max-width: 500px;
   margin: 50px auto;
   padding: 100px;
   background-color: #ffffff;
-  margin-top: 300px;
+  margin-top: 200px;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .container-login h1 {
@@ -62,6 +68,12 @@
   font-size: 16px;
   color: darkslategrey;
   text-align: center;
+}
+.loading-container-login {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
 }
 
 @media (max-width: 600px) {

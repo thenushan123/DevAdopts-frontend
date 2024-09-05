@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/UserContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -83,13 +85,18 @@ export default function Register() {
     }
   };
 
-  const validatePasswordMatch = () => {
-    if (formData.password !== formData.repeat_Password) {
-      setErrorPasswordMatch(true);
-    } else {
-      setErrorPasswordMatch(false);
-    }
-  };
+    const validatePasswordMatch =()=>{
+        if (formData.password !== formData.repeat_Password) {
+            setErrorPasswordMatch(true);
+          } 
+        else  {
+            setErrorPasswordMatch(false); 
+        }
+      };
+      if (loading) return (
+        <div className='loading-container-register'>
+                <FontAwesomeIcon icon={faSpinner} pulse size="5x"/>;
+        </div>);
 
   return (
     <div className='register-page'>

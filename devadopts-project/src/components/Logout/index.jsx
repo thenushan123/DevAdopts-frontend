@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/UserContext';
+import './Logout.css';
 
 export default function Logout() {
     const navigate = useNavigate();
-    const { token, setToken, setUserId } = useProfileContext();
+    const { token, setToken, setUserId, setFavorites } = useProfileContext();
 
     async function handleLogout(){
         try{
@@ -20,9 +21,9 @@ export default function Logout() {
           localStorage.removeItem("token");
           setToken(null);
           setUserId(null);
-          console.log("response", response);
+          setFavorites(null);
           if (response.ok){
-          navigate('/login');
+          navigate('/');
           }
         }
         catch(error){
@@ -30,6 +31,6 @@ export default function Logout() {
         }
     }
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button className='logout-button' onClick={handleLogout}>Logout</button>
   )
 }

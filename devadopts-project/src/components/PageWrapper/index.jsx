@@ -18,7 +18,9 @@ export default function PageWrapper() {
               alt="DevAdopts Logo"
               className="brand-icon"
             />
-            <h1>DevAdopts</h1>
+            <NavLink to='/'>
+              <h1>DevAdopts</h1>
+            </NavLink>
           </div>
           <nav className="nav-links">
             {!token ? (
@@ -27,12 +29,12 @@ export default function PageWrapper() {
                 <NavLink to="/register">Register</NavLink>
               </>
             ) : null}
-            <NavLink to="/donate">Donate</NavLink>
             <NavLink to="/AboutUs">About Us</NavLink>
+            <NavLink to="/donate">Donate</NavLink>
             {token ? (
               <>
-                <Logout />
                 <NavLink to="/userprofile">UserProfile</NavLink>
+                <Logout />
               </>
             ) : null}
           </nav>

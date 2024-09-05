@@ -8,13 +8,14 @@
 
 .navbar {
   background-color: #fb8261;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100%;
   top: 0;
-  padding: 30px 0px;
+  /* padding: 30px 0px; */
   z-index: 1000;
 }
 
@@ -32,8 +33,8 @@
 }
 
 .brand-icon {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
 }
 
 .nav-links {

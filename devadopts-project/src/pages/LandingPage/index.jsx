@@ -55,14 +55,14 @@ const LandingPage = () => {
   </h2>
   <img src="./images/Logo.png" className="logo-image" alt="Logo" />
   <img src="./images/PawPrints.png" className="pawprints-image" alt="Paw Prints" />
-  <button className="talk-to-dogbot-button" onClick={handleDogbotButtonClick}>
+  <button className="talk-to-dogbot-button" onClick={handleHomeButtonClick}>
     Talk to <span className="highlight-red">Dogbot</span> Now
   </button>
 </div>
   <div className="right-half">
     <img src="./images/Map2.png" className="map-image" alt="Map" />
-    <button className="custom-button" onClick={handleHomeButtonClick}>
-      <span className="highlight-orange">Don`&apos;`t Want To Be </span>
+    <button className="custom-button" onClick={handleDogbotButtonClick}>
+      <span className="highlight-orange">Don&apos;t Want To Be </span>
       <span className="highlight-red">Matched?</span>
       <br />
       <span className="highlight-orange">Start </span>

@@ -9,13 +9,15 @@
   margin-top: 140px;
   margin-bottom: -80px;
   font-size: 30px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   /* justify-content: space-between; */
-  background-color: #fef4eb;
+  background-color: #ffffff;
   margin-top: 100px;
   padding: 20px;
   border-radius: 10px;
@@ -114,9 +116,12 @@ button.search-dogs:focus {
   margin-right: 20px;
 }
 .dogs-list {
-  margin: 30px;
+  margin-top: 20px;
+  margin-left: 120px;
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  background-color: #fef4eb;
+  column-gap: 0px; /* Adjusts only the horizontal spacing */
+  row-gap: 40px; /* Keeps the vertical spacing as is */
+  background-color: #ffffff;
 }

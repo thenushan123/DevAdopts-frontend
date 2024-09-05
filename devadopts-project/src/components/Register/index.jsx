@@ -97,13 +97,6 @@ export default function Register() {
         <div className='loading-container-register'>
                 <FontAwesomeIcon icon={faSpinner} pulse size="5x"/>;
         </div>);
-  const validatePasswordMatch = () => {
-    if (formData.password !== formData.repeat_Password) {
-      setErrorPasswordMatch(true);
-    } else {
-      setErrorPasswordMatch(false);
-    }
-  };
 
   return (
     <div className='register-page'>

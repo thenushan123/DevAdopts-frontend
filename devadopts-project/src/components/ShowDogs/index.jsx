@@ -74,7 +74,7 @@ export default function ShowDogs() {
               `Error fetching geocode for postcode ${dog.shelter_location_postcode}:`,
               error
             );
-            return dog; // Return dog without location if there's an error
+            return dog; 
           }
         })
       );
@@ -127,7 +127,7 @@ export default function ShowDogs() {
           className="search-input"
           value={postcode}
           onChange={(e) => setPostcode(e.target.value)}
-          placeholder="Enter your postcode"
+          placeholder="Search by postcode or breed"
         />
         {errorPostCode && (
           <p style={{ color: "red" }}>Please enter a correct postcode</p>

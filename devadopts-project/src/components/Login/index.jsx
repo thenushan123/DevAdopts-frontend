@@ -66,35 +66,37 @@ export default function Login() {
                 <FontAwesomeIcon icon={faSpinner} pulse size="5x"/>;
         </div>);
   return (
-    <div className='container-login'>
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-        <div>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder='Email'
-                required
-            />
+    <div className='container-login-page'>
+        <div className='container-login'>
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+            <div>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder='Email'
+                    required
+                />
+            </div>
+            <div>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder='Password'
+                    required
+                />
+            </div>
+            <button type="submit">Login</button>
+            <span>{error && <p style={{ color: 'red' }}>Incorrect Email or Password</p>}</span>
+            </form>
+            <p>Are you a new user? <Link to='/Register'> Register</Link></p>
         </div>
-        <div>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder='Password'
-                required
-            />
-        </div>
-        <button type="submit">Login</button>
-        <span>{error && <p style={{ color: 'red' }}>Passowrd or Email id is incorrect</p>}</span>
-        </form>
-        <p>Are you a new user? <Link to='/Register'> Register</Link></p>
     </div>
   )
 }

@@ -23,7 +23,7 @@ export default function Logout() {
           setUserId(null);
           setFavorites(null);
           if (response.ok){
-          navigate('/login');
+          navigate('/');
           }
         }
         catch(error){

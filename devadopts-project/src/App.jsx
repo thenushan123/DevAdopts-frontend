@@ -36,7 +36,7 @@ function App() {
             <Route path="/Logout" element={<ProtectedRoute redirectTo="/login" />}>
               <Route index element={<Logout />}/>
             </Route>
-            <Route path="/DogsDisplay">
+            <Route path="/DogsDisplay" element={<ProtectedRoute redirectTo="/login" />}>
               <Route index element={<DogsDisplay />} />
               <Route path=":id" element={<DogDetailsPage />} />
             </Route>

@@ -29,7 +29,6 @@
   color: white;
   margin: 0;
   margin-left: 50px; /* Spacing between logo and text */
-  font-family: "Arial", sans-serif;
 }
 
 .brand-icon {
@@ -64,8 +63,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: none;
+  background-color: white;
   color: rgb(74, 71, 71);
   text-align: center;
-  backdrop-filter: blur(10px);
 }

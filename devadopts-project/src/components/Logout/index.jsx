@@ -31,6 +31,6 @@ export default function Logout() {
         }
     }
   return (
-    <button className='logout-button' onClick={handleLogout}>Logout</button>
+    <button className='devadopts-logout-button' onClick={handleLogout}>Logout</button>
   )
 }

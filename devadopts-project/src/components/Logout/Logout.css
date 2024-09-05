@@ -1,10 +1,11 @@
-.logout-button{
+.devadopts-logout-button {
     border: none;
     background: coral;
     color: white;
     font-size: large;
     font-weight: 600;
 }
-.logout-button:hover{
+
+.devadopts-logout-button:hover {
 text-decoration: underline;
 }

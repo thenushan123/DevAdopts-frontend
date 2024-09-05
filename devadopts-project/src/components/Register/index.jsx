@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate} from 'react-router-dom';
 import { useProfileContext } from '../../contexts/UserContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -91,9 +93,12 @@ export default function Register() {
             setErrorPasswordMatch(false); 
         }
       };
+      if (loading) return (
+        <div className='loading-container-register'>
+                <FontAwesomeIcon icon={faSpinner} pulse size="5x"/>;
+        </div>);
   return (
     <div className='container-register'>
-       {loading && <div className="loading">Registering user...</div>}
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
             <div>

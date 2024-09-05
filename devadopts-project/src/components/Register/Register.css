@@ -10,7 +10,12 @@
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.loading-container-register {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
 /* Header styling */
 .container-register h1 {
   text-align: center;

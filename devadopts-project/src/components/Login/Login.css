@@ -63,6 +63,12 @@
   color: darkslategrey;
   text-align: center;
 }
+.loading-container-login {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
 
 @media (max-width: 600px) {
   .container-login {

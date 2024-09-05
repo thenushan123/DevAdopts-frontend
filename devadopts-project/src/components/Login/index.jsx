@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
 import { useProfileContext } from '../../contexts/UserContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
     const {loading, setLoading, setToken} = useProfileContext();
@@ -14,6 +16,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     const handleChange=(e)=>{
+        setError('');
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
@@ -38,9 +41,9 @@ export default function Login() {
                 }
                 setLoading(true);
                 const response = await fetch(`${process.env.REACT_URL}/users/login`, options);
-                setLoading(false);
                 if (response.status === 200) {
                     const data = await response.json();
+                    setLoading(false);
                     setError('');
                     localStorage.setItem("token", data.token);
 
@@ -49,6 +52,7 @@ export default function Login() {
                     navigate('/home');
                 }
                 else {
+                    setLoading(false);
                     const errorMessage = await response.text();
                     setError(errorMessage || 'Login failed. Please check your credentials and try again.');
                  }
@@ -59,7 +63,10 @@ export default function Login() {
             }
         }
     }
-    if (loading) return <div className="loading">Logging in</div>;
+    if (loading) return (
+        <div className='loading-container-login'>
+                <FontAwesomeIcon icon={faSpinner} pulse size="5x"/>;
+        </div>);
   return (
     <div className='container-login'>
         <h1>Login</h1>
@@ -87,7 +94,7 @@ export default function Login() {
             />
         </div>
         <button type="submit">Login</button>
-        <p>{error}</p>
+        <span>{error && <p style={{ color: 'red' }}>Passowrd or Email id is incorrect</p>}</span>
         </form>
         <p>Are you a new user? <Link to='/Register'> Register</Link></p>
     </div>

@@ -1,86 +1,154 @@
+// Register.test.jsx
 import React from "react";
-import { describe, it, expect, beforeEach, afterEach} from 'vitest';
-import { screen, render, cleanup} from '@testing-library/react';
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, it, vi, beforeEach, expect } from "vitest";
+import { BrowserRouter } from "react-router-dom";
+import Register from ".";
+import { useProfileContext } from "../../contexts/UserContext";
 import * as matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
-import Register from '.';
-import { BrowserRouter } from "react-router-dom";
-// import { userProfileContext, UserProvider } from "../../contexts/UserContext";
-// jest.mock('../../contexts/UserContext', () => ({
-//     userProfileContext: jest.fn(),
-//   }));
+// Mocking the useProfileContext to control loading state
+vi.mock("../../contexts/UserContext", () => ({
+  useProfileContext: vi.fn(),
+}));
 
-describe.skip("Register component",()=>{
-    // const mockSetLoading = jest.fn();
+vi.mock("@fortawesome/react-fontawesome", () => ({
+  FontAwesomeIcon: () => <span>Loading...</span>,
+}));
 
-    // beforeEach(() => {
-    // require('../../contexts/UserContext').userProfileContext.mockReturnValue({
-    //     loading: false,  // Set to true or false as needed for different test scenarios
-    //     setLoading: mockSetLoading,
-    //   });
-    // });
-
-    const setup = () => {
-        render(
-          <BrowserRouter>
-            <Register />
-          </BrowserRouter>
-        );
-      };
-    afterEach(()=>{
-        cleanup();
-    })
-    it("Displays all the input boxes on page render", ()=>{
-        setup();
-        const heading = screen.getByRole("heading");
-        expect(heading).toBeInTheDocument();
-
-        const firstName = screen.getByPlaceholderText('First Name')
-        expect(firstName).toBeInTheDocument();
-
-        const lastName = screen.getByPlaceholderText('Last Name')
-        expect(lastName).toBeInTheDocument();
-
-        const email = screen.getByPlaceholderText('Email')
-        expect(email).toBeInTheDocument();
-
-        const password = screen.getByPlaceholderText('Password')
-        expect(password).toBeInTheDocument();
-
-        const retypePassword = screen.getByPlaceholderText('Retype your password')
-        expect(retypePassword).toBeInTheDocument();
-
-        const postcode = screen.getByPlaceholderText('Postcode')
-        expect(postcode).toBeInTheDocument();
-    })
-    it("Displays a submit button on page render", ()=>{
-        setup();
-        const registerButton= screen.getByRole('button', { name: /register/i });
-        expect(registerButton).toBeInTheDocument();
-    })
-    it("Displays a paragraph with link to login", ()=>{
-        setup();
-        const para = screen.getByText(/Already a user\?/i);
-        expect(para).toBeInTheDocument();
-
-        const link = screen.getByText(/Login/i);
-        expect(link).toBeInTheDocument();
-    })
-    it("Displays an error when passwords donot match", async ()=>{
-        setup();
-        const user = userEvent.setup();
-
-        const passwordInput = screen.getByPlaceholderText("Password");
-        const repeatPasswordInput = screen.getByPlaceholderText("Retype your password");
-        
-        await user.type(passwordInput, 'password123');
-        await user.type(repeatPasswordInput, 'differentPass');
-
-        await user.click(screen.getByText('Register'));
-    
-        // Expect an error message to appear
-        expect(screen.getByText('Passwords donot match!')).toBeInTheDocument();
+describe("Register Component", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    useProfileContext.mockReturnValue({
+      loading: false,
+      setLoading: vi.fn(),
+    });
   });
-})
+
+  const renderComponent = () =>
+    render(
+      <BrowserRouter>
+        <Register />
+      </BrowserRouter>
+    );
+
+  it("renders Register form elements correctly", () => {
+    renderComponent();
+
+    expect(screen.getByPlaceholderText("First Name")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Last Name")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("Retype your password")
+    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Postcode")).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it("calls setLoading and shows loading indicator during submission", async () => {
+    const setLoadingMock = vi.fn();
+    useProfileContext.mockReturnValue({
+      loading: false,
+      setLoading: setLoadingMock,
+    });
+
+    renderComponent();
+
+    fireEvent.change(screen.getByPlaceholderText("First Name"), {
+      target: { value: "John" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Last Name"), {
+      target: { value: "Doe" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "john.doe@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Retype your password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Postcode"), {
+      target: { value: "W1A 1AA" },
+    });
+
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => {
+      expect(setLoadingMock).toHaveBeenCalledWith(true);
+    });
+  });
+
+  it("shows success message and navigates to login on successful registration", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    });
+
+    renderComponent();
+
+    fireEvent.change(screen.getByPlaceholderText("First Name"), {
+      target: { value: "John" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Last Name"), {
+      target: { value: "Doe" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "john.doe@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Retype your password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Postcode"), {
+      target: { value: "W1A 1AA" },
+    });
+
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => {
+      expect(screen.getByText("Registered successfully.")).toBeInTheDocument();
+    });
+  });
+
+  it("shows error message on failed registration attempt", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 400,
+    });
+
+    renderComponent();
+
+    fireEvent.change(screen.getByPlaceholderText("First Name"), {
+      target: { value: "John" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Last Name"), {
+      target: { value: "Doe" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "john.doe@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Retype your password"), {
+      target: { value: "password123" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Postcode"), {
+      target: { value: "W1A 1AA" },
+    });
+
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText("Unsuccessful Registration.")
+      ).toBeInTheDocument();
+    });
+  });
+});

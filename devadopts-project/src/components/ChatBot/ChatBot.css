@@ -41,6 +41,10 @@
   margin-bottom: 10px;
 }
 
+.chatbot-mini-container::-webkit-scrollbar {
+  display: none;
+}
+
 .chatbot-message-container {
   margin-bottom: 20px;
 }

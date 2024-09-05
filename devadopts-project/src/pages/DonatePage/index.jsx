@@ -44,7 +44,7 @@ const DonatePage = () => {
             onClick={() => handleDonationTypeChange("single")}
           >
             <img
-              src="../../../public/images/card-icon.png"
+              src="/images/card-icon.png"
               alt="Icon"
               className="button-icon"
             />
@@ -57,7 +57,7 @@ const DonatePage = () => {
             onClick={() => handleDonationTypeChange("monthly")}
           >
             <img
-              src="../../../public/images/calendar-icon-donatepage.png"
+              src="/images/calendar-icon-donatepage.png"
               alt="Icon"
               className="button-icon"
             />

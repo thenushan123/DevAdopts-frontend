@@ -1,43 +1,40 @@
-/* Container for the registration form */
+
 .container-register {
-  max-width: 400px;
+  max-width: 600px;
   margin: 50px auto;
-  margin-top: 300px;
-  padding: 60px;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding: 60px 40px;
   background-color: #ffffff;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-/* Header styling */
+.loading-container-register {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
 .container-register h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; 
   color: #333;
-  font-family: "Arial", sans-serif;
-  font-size: 24px;
+  font-size: 28px;
 }
 
-/* Style each input container */
 .container-register div {
-  margin-bottom: 15px;
+  margin-bottom: 20px; 
 }
 
-/* Input field styling */
 .container-register input[type="text"],
 .container-register input[type="email"],
 .container-register input[type="password"] {
   width: 100%;
-  padding: 10px;
-  font-size: 20px;
+  padding: 15px; 
+  font-size: 18px; 
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
 
-/* Input field focus state */
 .container-register input[type="text"]:focus,
 .container-register input[type="email"]:focus,
 .container-register input[type="password"]:focus {
@@ -46,31 +43,29 @@
   box-shadow: 0 0 5px rgb(191, 137, 37);
 }
 
-/* Button styling */
 .container-register button {
   width: 100%;
-  padding: 10px;
+  padding: 15px; 
   background-color: #fb8261;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
 .container-register button:hover {
   background-color: #527193;
 }
 
-/* Error message styling */
 .container-register span {
   margin: 5px 0;
-  font-size: 20px;
+  font-size: 16px;
   color: red;
 }
+
 .message-success {
   margin: 5px 0;
   font-size: 20px;
@@ -79,15 +74,23 @@
 
 @media (max-width: 480px) {
   .container-register {
-    padding: 15px;
-    margin: 20px;
+    max-width: 90%; 
+    padding: 30px; 
+    margin: 20px auto;
   }
 
   .container-register h1 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .container-register button {
-    font-size: 14px;
+    font-size: 16px;
   }
+}
+
+
+.register-page {
+  background-color: #fef4eb; 
+  height: 100vh; 
+  padding-top: 70px
 }

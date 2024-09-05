@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+  const [favorites, setFavorites] = useState([]);
   
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export const UserProvider = ({ children }) => {
   }, [token])
 
 
-  const value = { loading, setLoading, userId, setUserId, token, setToken }
+  const value = { loading, setLoading, userId, setUserId, token, setToken, favorites,setFavorites }
   
   return (
     <UserContext.Provider value={value}>

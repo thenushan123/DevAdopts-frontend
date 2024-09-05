@@ -1,101 +1,196 @@
-import {useState, useEffect} from "react";
-import { jwtDecode } from "jwt-decode";
+
+import {useState, useEffect, useCallback } from "react";
+import { useProfileContext } from "../../contexts/UserContext";
+import { options, requiredAIKeys } from "../../utils/helpers";
+import SyncLoader from "react-spinners/SyncLoader";
 import './ChatBot.css';
+import {Link} from 'react-router-dom';
 
 export default function App() {
-    const [bot, setBot] = useState({});
+    const { token, userId } = useProfileContext();
+    const [preference, setPreference] = useState({});
+    const [botAnswer, setBotAnswer] = useState("");
+    const [converations, setConversations] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [botHasInteracted, setBotHasInteracted] = useState(false);
+    const [userInput, setUserInput] = useState("");
 
-    const callBackend = async () => {
-        const token = localStorage.getItem("token");
-        const obj = jwtDecode(token);
-        console.log("obj", obj);
-        const userId = obj.user_id
-        console.log("userId", userId)
+    const updateUserAnswer = async (e) => {
+        e.preventDefault();
+        const option = options(token, "PATCH");
 
+        if (userInput.length === 0) {
+            return;
+        }
 
+        const length = converations.length;
+
+        converations[length - 1] = { ...converations[length - 1], userAnswer: userInput };
+        setConversations(converations);
+
+        const key = requiredAIKeys[length - 1];
+        console.log("Key worked?", key);
+        option.body = JSON.stringify({
+            [key]: userInput
+        });
+
+        const updatePreference = await fetch(`${process.env.REACT_URL}/bot/preferences/${preference.preference_id}`, option);
+        
+        if (updatePreference.status === 200) {
+            const updateJson = await updatePreference.json();
+            setPreference(updateJson.data);
+            setBotHasInteracted(false);
+        }
+        setUserInput("");
     }
 
+
+    const startChatbot = useCallback(async () => {
+        const option = options(token, "POST");
+
+        option.body = JSON.stringify({ user_id: userId });
+
+        const startBot = await fetch(`${process.env.REACT_URL}/bot/preferences`, option);
+        if (startBot.status === 201) {
+            const pref = await startBot.json();
+            setPreference(pref.data);
+        }
+
+    }, [token, userId]);
+
     useEffect(() => {
-        callBackend()
-    }, []);
+        if (token && userId) {
+            startChatbot()
+        }
+    }, [token, startChatbot, userId]);
+
+    useEffect(() => {
+        if (preference && !botHasInteracted) {
+            if (preference.preference_id) {
+                const botInteraction = async () => {
+                    const option = options(token, "GET");
+                    
+                    setLoading(true);
+                    converations.push({ load: true });
+                    const length = converations.length;
+                    try {
+                        const interaction = await fetch(`${process.env.REACT_URL}/bot/preferences/interact-with-bot/${preference.preference_id}`, option);
+                        if (interaction.status === 200) {
+                            const botQA = await interaction.json();
+                            setBotAnswer(botQA.data.answer);
+                            converations[length - 1] = { botQa: botQA.data.answer, load: false };
+                            // converations.unshift({ botQa: botQA.data.answer });
+                            // converations.reverse();
+                            setConversations(converations);
+                        }
+                    } catch (error) {
+                        console.error("Error during bot interaction", error)
+                    } finally {
+                        setLoading(false)
+                    }
+
+                }
+                botInteraction();
+                setBotHasInteracted(true);
+            }
+        }
+    }, [preference, botHasInteracted, converations, token]);
+
+    console.log("bot", preference);
+    console.log("BOT ANSWER", botAnswer);
+    console.log("user input", userInput);
+    console.log("convo", converations);
+    console.log("loading", loading);
 
     return (
         <main className="chatbot-page">
             <section className="chatbot-container">
-                <div className="chatbot-search"><button>Search</button></div>
+                {/* <SyncLoader /> */}
+                <div className="chatbot-search"><Link to='/DogsDisplay'><button>Search</button></Link></div>
                 <div className="chatbot-discover"><button>Discover</button></div>
                 <div className="chatbot-board-container">
+
                     <div className="chatbot-interface">
                         <div className="chatbot-message-container">
                             <p className="chatbot-start-message">Start Chatting</p>
                         </div>
+
                         <div className="chatbot-mini-container">
                             {/* 1 */}
-                            <div className="chatbot-ai-message-container">
-                                <div className="chatbot-ai-logo">
-                                    <img src="/images/Logo.png" alt="dog logo" />
-                                </div>
-                                <div className="chatbot-ai-answer">
-                                    <p>How many small animals have you got?</p>
-                                </div>
-                            </div>
 
-                            <div className="user-question-container">
-                                <div className="user-ai-answer">
-                                    <p>Yes I have 2 hamsters</p>
-                                </div>
-                            </div>
+                            {
+                                converations.map((info, index) => {
 
-                            {/* 2 */}
-                            <div className="chatbot-ai-message-container">
-                                <div className="chatbot-ai-logo">
-                                    <img src="/images/Logo.png" alt="dog logo" />
-                                </div>
-                                <div className="chatbot-ai-answer">
-                                    <p>Have you got small children?</p>
-                                </div>
-                            </div>
+                                    return (
+                                        <>
 
-                            <div className="user-question-container">
-                                <div className="user-ai-answer">
-                                    <p>I have a baby girl</p>
-                                </div>
-                            </div>
+                                            <>
+                                                {
+                                                    info ? info.botQa ?
 
-                            {/* 3 */}
-                            <div className="chatbot-ai-message-container">
-                                <div className="chatbot-ai-logo">
-                                    <img src="/images/Logo.png" alt="dog logo" />
-                                </div>
-                                <div className="chatbot-ai-answer">
-                                    <p>Based on your answers, here is what we recommend for dog breeds that would suit your lifestyle and preferences:
-                                        
-                                        1. **Goldendoodle**: This breed is known for its friendly disposition and hypoallergenic coat, making it a great choice for families with allergies. Goldendoodles are also great with children and other pets, and they enjoy being active.
-                                        
-                                        2. **Labradoodle**: Similar to the Goldendoodle, Labradoodles are intelligent, friendly, and hypoallergenic. They are excellent with children and can thrive in an active environment, making them a wonderful choice for your household.
-                                        
-                                        3. **Bernese Mountain Dog**: These gentle giants are known for their friendly nature and love for children. They are also quite social and can get along well with other animals. Their size and temperament make them suitable for families with plenty of space.
-                                        
-                                        4. **Standard Poodle**: Highly intelligent and easily trainable, Standard Poodles are another hypoallergenic option. They are energetic and love to engage in various activities, making them perfect for an active family.
-                                        
-                                        5. **Collie**: Collies are known for their gentle nature and protective instinct, which makes them good family dogs. They adapt well to living with other pets and need plenty of exercise, aligning with your active lifestyle.
-                                        
-                                        All these breeds have a friendly disposition, are good with children, and can accommodate your allergy concerns while being suitable for living with other animals.</p>
-                                </div>
-                            </div>
+                                                    <div key={"Bot." + index} className="chatbot-ai-message-container">
+                                                        <div className="chatbot-ai-logo">
+                                                            <img src="/images/Logo.png" alt="dog logo" />
+                                                        </div>
+                                                        <div className="chatbot-ai-answer">
+                                                            <p>{info.botQa}</p>
+                                                        </div>
+                                                    </div> : null : null
+                                                }
+                                            </>
+                                            <>
+                                                {
+                                                    info ? info.userAnswer ?
+                                                    <div key={"User." + index} className="user-question-container">
+                                                        <div className="user-ai-answer">
+                                                            <p>{info.userAnswer}</p>
+                                                        </div>
+                                                    </div> : null : null
+                                                }
 
-                            <div className="user-question-container">
-                                <div className="user-ai-answer">
-                                    <p>Start </p>
-                                </div>
-                            </div>
+                                            </>
+
+                                            <>
+                                            {
+                                                loading && info.load ? 
+                                                <div key={"Bot." + index} className="chatbot-ai-message-container">
+                                                    <div className="chatbot-ai-logo">
+                                                        <img src="/images/Logo.png" alt="dog logo" />
+                                                    </div>
+                                                    <div className="chatbot-ai-answer-loader">
+                                                        <SyncLoader 
+                                                            size={13}
+                                                            color="#FB8261"
+                                                        />
+                                                    </div>
+                                                </div>                                                    
+
+
+                                                : null
+                                            }
+                                            </>
+                                        </>
+                                    )
+
+                                })
+                            }
 
                         </div>
-                        <div className="user-text-container">
-                            <input type="text" className="user-text-input" placeholder="Type your message..." />
+
+                        <form onSubmit={updateUserAnswer} className="user-text-container">
+                            <input 
+                                type="text" 
+                                className="user-text-input" 
+                                placeholder="Type your message..." 
+                                value={userInput}
+                                onChange={(e) => setUserInput(e.target.value)}  
+                            />
                             <button className="user-text-send">Send</button>
-                        </div>
-                    </div>
+                        </form>
+
+
+
+                    </div>                    
                 </div>
             </section>
         </main>

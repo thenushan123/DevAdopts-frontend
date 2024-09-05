@@ -40,7 +40,7 @@ export default function MapDisplay({searchedDogs}) {
     getAPIKey();
   },[])
   if (!apiKey) {
-    return <p>Loading Map...</p>;
+    return <p style={{ marginLeft: '1000px', color:"orange", fontSize: '18px', fontWeight: 'bold' }}>Loading Map...</p>;
   }
   return (
     <LoadScript googleMapsApiKey={apiKey}>
@@ -49,7 +49,7 @@ export default function MapDisplay({searchedDogs}) {
           <Marker
             key={dog.dog_id}
             position={{ lat: Number(dog.latitude), lng: Number(dog.longitude) }}
-            label={dog.dog_name}
+            // label={dog.dog_name}
             onClick={() => setSelectedDog(dog)}
           />
         ))}

@@ -99,7 +99,12 @@ button.search-dogs:focus {
   font-size: 14px;
   margin-right: 10px;
 }
-
+.loading-container-dogsdisplay{
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items:flex-start; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+}
 .radius-input input {
   width: 80px;
   padding: 5px;

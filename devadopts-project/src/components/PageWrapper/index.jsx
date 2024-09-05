@@ -13,12 +13,14 @@ export default function PageWrapper() {
       <header className="navbar-container">
         <div className="navbar">
           <div className="brand">
-            <img
-              src="your-icon-path.png"
-              alt="DevAdopts Logo"
-              className="brand-icon"
-            />
+          <img
+            src="your-icon-path.png"
+            alt="DevAdopts Logo"
+            className="brand-icon"
+          />
+          <NavLink to='/home'>
             <h1>DevAdopts</h1>
+          </NavLink>
           </div>
           <nav className="nav-links">
             {!token ? (
@@ -27,13 +29,15 @@ export default function PageWrapper() {
                 <NavLink to="/register">Register</NavLink>
               </>
             ) : null}
+            {token ? (
+              <>
+                <NavLink to="/userprofile">UserProfile</NavLink>
+              </>
+            ) : null}
             <NavLink to="/donate">Donate</NavLink>
             <NavLink to="/AboutUs">About Us</NavLink>
             {token ? (
-              <>
-                <Logout />
-                <NavLink to="/userprofile">UserProfile</NavLink>
-              </>
+              <Logout />
             ) : null}
           </nav>
         </div>

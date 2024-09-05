@@ -46,9 +46,7 @@ export default function Login() {
                     setLoading(false);
                     setError('');
                     localStorage.setItem("token", data.token);
-
                     setToken(data.token);
-
                     navigate('/home');
                 }
                 else {

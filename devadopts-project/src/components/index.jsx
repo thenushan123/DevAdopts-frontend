@@ -7,3 +7,4 @@ export { default as DogDetails } from "./DogDetails";
 export { default as AdoptionCosts } from "./AdoptionCosts";
 export { default as FavoriteDogs } from "./FavoriteDogs";
 export { default as Logout } from "./Logout";
+export { default as ProtectedRoute } from "./ProtectedRoute";

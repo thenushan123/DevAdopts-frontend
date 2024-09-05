@@ -31,6 +31,10 @@
   max-height: 70vh;
 }
 
+.chatbot-interface::-webkit-scrollbar {
+  display: none;
+}
+
 .chatbot-mini-container {
   flex-grow: 1;
   overflow-y: auto;

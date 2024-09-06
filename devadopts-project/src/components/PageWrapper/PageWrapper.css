@@ -43,18 +43,6 @@
   margin-right: 60px;
 }
 
-.nav-links:last-child{
-  border: none;
-    background: coral;
-    color: white;
-    font-size: large;
-    font-weight: 600;
-}
-
-.nav-links:last-child:hover {
-  text-decoration: underline;
-}
-
 .navbar a {
   color: white;
   font-size: 18px;
